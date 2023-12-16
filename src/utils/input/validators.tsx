@@ -1,4 +1,4 @@
-import { T_InputValidatorCallback } from "@/components/Interactibles/types";
+import { T_InputValidatorCallback } from "@/utils/input/types";
 
 
 
@@ -44,5 +44,14 @@ export const evalFileType: T_InputValidatorCallback<[string]> =
     return {
         error: `File must be of type "${type}".`,
         validate: () => file.type === type
+    };
+}
+
+export const evalFileSize: T_InputValidatorCallback<[number]> = 
+(size: number) => 
+(file: File) => {
+    return {
+        error: `File size must be less than ${size} MB.`,
+        validate: () => file.size >= size
     };
 }

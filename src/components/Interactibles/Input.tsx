@@ -2,10 +2,11 @@
 
 import { css } from "@/utils/css/css";
 import { ChangeEvent, useEffect, useState } from "react"
-import { T_Input, T_TextInput } from "./types";
+import { T_Input, T_TextInput } from "../../utils/input/types";
 
 export default function Input({ input } : { input: T_TextInput }) {
     const [id, setId] = useState('');
+    const [isValid, setIsValid] = useState(false);
     const [errors, setErrors] = useState<string[]>([]);
     useEffect(() => {
         setId(crypto.randomUUID());
@@ -23,6 +24,7 @@ export default function Input({ input } : { input: T_TextInput }) {
         }
 
         input.onInput(target);
+        setIsValid(errors.length === 0);
     }
 
     return (
@@ -31,7 +33,11 @@ export default function Input({ input } : { input: T_TextInput }) {
             <input 
                 className={css("input-container__input").class} 
                 onChange={handleInput} id={id} 
+                
+                name={input.name}
                 type={input.inputType} 
+
+                data-valid={isValid}
             />
             <ul className={css("input-container__error-list").class}>
                 {(errors.length > 0) 
