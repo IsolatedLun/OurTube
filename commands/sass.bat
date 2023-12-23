@@ -1,0 +1,1 @@
+cd .. && cd src && cd sass && sass styles.scss ../app/sassy.css --watch

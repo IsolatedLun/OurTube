@@ -1,20 +1,20 @@
 "use client";
 
-import styles from './page.module.css'
-import Input from '@/components/Interactibles/Input'
+import Input from '@/components/Interactibles/TextInput'
+import FileInput from '@/components/Interactibles/FileInput'
 import { useFormHook } from '@/hooks/formHook';
 import { evalMinLength } from '@/utils/input/validators'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 export default function Home() {
   const [userForm, setUserForm] = useState({
     'username': "",
     'email_address': ""
   });
-  const [userFormHook, isValid] = useFormHook();
+  const [userFormHook, isValid] = useFormHook(userForm);
 
   return (
-    <main className={styles.main}>
+    <main>
       <form onSubmit={(e) => {
         e.preventDefault(); alert(isValid)
       }}>
@@ -30,6 +30,12 @@ export default function Home() {
           name: 'email_address',
           validators: [evalMinLength(1)],
           inputType: 'text',
+          onInput: (e) => userFormHook(e, setUserForm),
+        }} />
+        <FileInput input={{
+          label: 'File',
+          name: 'file',
+          validators: [],
           onInput: (e) => userFormHook(e, setUserForm),
         }} />
 

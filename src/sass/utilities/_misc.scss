@@ -1,0 +1,80 @@
+@use '../abstracts/' as *; 
+
+$text-alignments: start, center, end;
+@each $alignment in $text-alignments {
+	.text-align-#{$alignment} {
+		text-align: #{$alignment};
+	}
+}
+
+$positions: relative, absolute, sticky, fixed;
+@each $position in $positions {
+	.pos-#{$position} {
+		position: #{$position};
+	}
+}
+
+$displays: block, inline, inline-block, flex, grid;
+@each $display in $displays {
+	.display-#{$display} {
+		display: #{$display};
+	}
+}
+
+$overflows: hidden, auto, scroll;
+$overflow-axes: x, y;
+@each $overflow in $overflows {
+	.overflow-#{$overflow} {
+		overflow: #{$overflow};
+	}
+
+	@each $axis in $overflow-axes {
+		.overflow-#{$axis}-#{$overflow} {
+			overflow-#{$axis}: #{$overflow};
+		}
+	}
+}
+
+// ===========
+// Manual
+// ===========
+.z-index-low {
+	z-index: $z-index-10;
+}
+
+.z-index-medium {
+	z-index: $z-index-100;
+}
+
+.z-index-high {
+	z-index: $z-index-1000;
+}
+
+.z-index-higher {
+	z-index: $z-index-10000;
+}
+
+// =
+.ignore-self {
+	pointer-events: none;
+}
+
+.cursor-pointer {
+	cursor: pointer;
+}
+
+.pointers-none {
+	pointer-events: none;
+}
+
+.outline-none {
+	outline: none;
+}
+
+.inset-0 {
+	inset: 0;
+}
+
+.opacity-0 {
+	opacity: 0;
+}

@@ -1,0 +1,24 @@
+$colors-dark: (
+	primary: (
+		400: hsl(206 100% 45%)
+	),
+	neutral: (
+		400: hsl(0, 0%, 12%),
+		500: hsl(0 0 30%),
+		600: hsl(0 0 40%),
+		700: hsl(0 0 50%),
+		800: hsl(0 0 60%),
+	)
+);
+
+$colors-light: ();
+
+$active-theme: $colors-dark;
+
+@each $colorTuple, $colorValues in $active-theme {
+	@each $colorName, $colorValue in $colorValues {
+		.clr-#{$colorTuple}-#{$colorName} {
+			color: $colorValue;
+		}
+	}
+}

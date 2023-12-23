@@ -1,0 +1,150 @@
+@use 'sass:color';
+@use '../../abstracts/' as *;
+
+@mixin createButton($background) {
+    padding: $button-padding;
+    background-color: $background;
+
+    border: $button-border-thickness solid $background;
+    border-radius: $button-border-radius;
+
+    cursor: pointer;
+
+    .overlay {
+        background-color: color.scale($background, $lightness: $button-overlay-brightness);
+    }
+
+    // Styling
+    &[data-attachments*='hologram'] {
+        $transparentBackground: transparentize($background, $button-hologram-transparency);
+
+        border: $button-border-thickness solid $transparentBackground;
+        background-color: $transparentBackground;
+
+        &[data-selected='true'] {
+            background-color: $background;
+        }
+    }
+
+    &[data-attachments*='hollow'] {
+        background-color: transparent;
+    }
+
+    &[data-attachments*='mix'] {
+        $lightness: lightness($background);
+        $difference: 0%;
+
+        @if $lightness > 50% {
+            $difference: 25%;
+        }
+        @else {
+            $difference: 35%;
+        }
+
+        $brighterBackground: color.adjust($background, $lightness: $difference);
+        color: $brighterBackground;
+    }
+
+    // Padding
+    &[data-attachments*='tiny-pad'] {
+        padding: $button-padding-tiny;
+    }
+    
+    &[data-attachments*='small-pad'] {
+        padding: $button-padding-small;
+    }
+
+    &[data-attachments*='big-pad'] {
+        padding: $button-padding-big;
+    }
+
+    &[data-attachments*='huge-pad'] {
+        padding: $button-padding-huge;
+    }
+
+    // Border
+    &[data-attachments*='capsule'] {
+        border-radius: $border-radius-max;
+    }
+
+    &[data-attachments*='flat'] {
+        border-radius: 0px;
+    }
+
+    // Animations
+    &[data-attachments*='rotate-icon'] {
+        .icon {
+            display: block;
+            animation: 
+                rotateButtonIconAnimation 
+                $buttom-anim-rotate-icon-duration 
+                infinite 
+                alternate
+            ;
+        }
+    }
+}
+
+.button {
+    &[data-variant='primary'] {
+        @include createButton($button-primary);
+    }
+
+    position: relative;
+    overflow: hidden;
+
+    @if $option-anim-button-overlay {
+        :not([data-attachments*='hide-overlay']).overlay {
+            position: absolute;
+            width: 1rem;
+            aspect-ratio: 1;
+    
+            scale: 1;
+            opacity: 1;
+            z-index: $z-index-10000;
+            border-radius: $border-radius-max;
+            pointer-events: none;
+    
+            transform-origin: center;
+            animation: overlayAnimation $button-anim-overlay-duration linear forwards;
+        }
+
+        @keyframes overlayAnimation {
+            0% {
+                scale: 0;
+                opacity: 1;
+            }
+        
+            40% {
+                scale: 4;
+                opacity: 0.75;
+            }
+        
+            100% {
+                scale: 4.5;
+                opacity: 0;
+            }
+        }
+    }
+}
+
+select {
+    padding: $button-padding;
+}
+
+@keyframes rotateButtonIconAnimation {
+    0% {
+        scale: 0.9;
+        rotate: 45deg;
+    }
+
+    50% {
+        scale: 0.85;
+        rotate: -180deg;
+    }
+
+    100% {
+        scale: 0.95;
+        rotate: 270deg;
+    }
+}

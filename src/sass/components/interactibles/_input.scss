@@ -1,0 +1,42 @@
+@use '../../abstracts/' as *;
+@use 'sass:color';
+
+@mixin createInput($background, $neutral) {
+    .input-end-button {
+        @include transformCenter($left: $input-end-icon-left);
+        color: $neutral;
+
+        transition: color $input-border-color-transition-duration ease-in-out;
+    }
+
+    .input {
+        padding: $input-padding;
+        border: $input-border-thickness solid $neutral;
+        border-radius: $border-radius-bevelled;
+    
+        background-color: $background;
+    
+        transition: border-color $input-border-color-transition-duration ease-in-out;
+        &:is(:hover, :focus-visible) {
+            // border-color: $clr-input-border-on-hov;
+            box-shadow: $input-box-shadow transparentize($neutral, 0.25);
+        }
+    }
+
+    &:is(:focus-within) {
+        .input-end-button {
+            color: color.adjust($neutral, $lightness: $input-end-icon-brightness);
+        }
+    }
+}
+
+.input-container {
+    textarea {
+        width: 100%;
+        resize: vertical;
+    }
+
+    &[data-variant='primary'] {
+        @include createInput($input-primary, $input-primary-neutral);
+    }
+}

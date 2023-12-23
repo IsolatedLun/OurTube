@@ -8,16 +8,17 @@ export type T_InputValidator = (value: any) => {
 };
 export type T_InputValidatorCallback<T extends any[]> = (...args: T) => T_InputValidator;
 
-export interface T_Input<T, V> {
+export type T_InputAttachments = ""
+export interface T_Input {
     cls?: T_CSS;
     label: string;
     name: string;
     
-    inputType: T;
     validators: T_InputValidator[];
+    attachments?: T_InputAttachments[];
 
     onInput: (input: HTMLInputElement) => void;
 }
 
-export type T_FileInput = T_Input<'file', File>;
-export type T_TextInput = T_Input<'text' | 'password', string>;
+export type T_FileInput = T_Input;
+export type T_TextInput = T_Input & {inputType: "text" | "password"};

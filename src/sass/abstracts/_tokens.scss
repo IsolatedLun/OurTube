@@ -1,0 +1,79 @@
+@use 'sass:color';
+
+@use './colors.scss' as *;
+
+// Options
+$option-anim-button-overlay: true;
+
+// Colors
+$clr-primary-400: map-get(map-get($active-theme, 'primary'), 400);
+
+$clr-neutral-400: map-get(map-get($active-theme, 'neutral'), 400);
+$clr-neutral-500: map-get(map-get($active-theme, 'neutral'), 500);
+
+// Global
+// @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@200;300;400;500;600&display=swap');
+
+$global-primary-font: system-ui;
+$global-color-scheme: dark;
+
+$global-background: none;
+$global-font-size: var(--fs-400);
+$global-font-family: $global-primary-font, system-ui;
+
+$border-radius-bevelled: 6px;
+$border-radius-max: 100vmax;
+
+$z-index-10: 999;
+$z-index-100: 9999;
+$z-index-1000: 99999;
+$z-index-10000: 999999;
+
+$global-gap: 1rem;
+
+$global-heading-line-height: 1.6;
+$global-paragraph-line-height: 1.2;
+
+$global-accent-color: $clr-primary-400;
+
+$global-outline-thickness: 2px;
+$global-outline-offset: 3px;
+
+// Container
+$container-padding: 2rem;
+
+$container-max-width: 1100px;
+$container-max-width-narrow: 900px;
+$container-max-width-wide: 1300px;
+
+// Anchor tag
+$a-color: $clr-primary-400;
+
+// Button
+$button-primary: $clr-primary-400;
+$button-border-radius: $border-radius-bevelled;
+
+$button-padding: 0.5rem 0.85rem;
+$button-padding-tiny: 0.1rem 0.6rem;
+$button-padding-small: 0.25rem 0.8rem;
+$button-padding-big: 0.6rem 1.2rem;
+$button-padding-huge: 0.85rem 1.4rem;
+
+$button-border-thickness: 2px;
+$button-overlay-brightness: 50%;
+$button-hologram-transparency: 0.55;
+
+$buttom-anim-rotate-icon-duration: 1s;
+$button-anim-overlay-duration: 0.35s;
+
+// Input
+$input-primary: $clr-neutral-400;
+$input-primary-neutral: $clr-neutral-500;
+
+$input-padding: 0.475rem 0.8rem;
+
+$input-box-shadow: 0 0 1px 3px;
+$input-border-thickness: 1px;
+$input-end-icon-left: 92%;
+$input-end-icon-brightness: 55%;
+$input-border-color-transition-duration: 244ms;

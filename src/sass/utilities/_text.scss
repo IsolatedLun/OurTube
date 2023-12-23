@@ -1,0 +1,31 @@
+@use '../abstracts/' as *;
+
+@for $i from 1 through 5 {
+    .text-ellipsis-#{$i} {
+        display: -webkit-box;
+        -webkit-line-clamp: $i;
+        -webkit-box-orient: vertical;
+
+        overflow: hidden;
+    }
+}
+
+.underline {
+	color: $global-accent-color;
+	border-bottom: 2px solid $global-accent-color;
+}
+
+.whitespace-pre-line {
+	white-space: pre-line;
+}
+
+// Screen readers
+.visually-hidden {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}

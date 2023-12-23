@@ -1,0 +1,6 @@
+@use '../abstracts' as *;
+
+.even-columns {
+    display: grid;
+    gap: $global-gap;
+}

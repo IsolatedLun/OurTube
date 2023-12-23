@@ -1,4 +1,5 @@
 import { T_InputValidatorCallback } from "@/utils/input/types";
+import { Some } from "../types";
 
 
 
@@ -40,18 +41,18 @@ export const evalSpecialCharacters: T_InputValidatorCallback<[string[], boolean]
 
 export const evalFileType: T_InputValidatorCallback<[string]> = 
 (type: string) => 
-(file: File) => {
+(file: Some<File>) => {
     return {
         error: `File must be of type "${type}".`,
-        validate: () => file.type === type
+        validate: () => file !== null && file.type === type
     };
 }
 
 export const evalFileSize: T_InputValidatorCallback<[number]> = 
 (size: number) => 
-(file: File) => {
+(file: Some<File>) => {
     return {
         error: `File size must be less than ${size} MB.`,
-        validate: () => file.size >= size
+        validate: () => file !== null && file.size >= size
     };
 }

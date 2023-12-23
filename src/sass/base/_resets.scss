@@ -1,0 +1,121 @@
+@use '../abstracts/' as *;
+
+*,
+*::before,
+*::after {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+*:focus {
+	outline: $global-outline-thickness solid $global-accent-color;
+	outline-offset: $global-outline-offset;
+}
+
+html {
+	scroll-behavior: smooth;
+	color-scheme: $global-color-scheme;
+}
+
+body {
+	font-family: $global-font-family;
+	font-size: $global-font-size;
+
+	@if $global-background != none {
+		background-color: $global-background;
+	}
+	text-rendering: optimizeLegibility;
+
+	min-height: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	line-height: $global-heading-line-height;
+}
+
+p {
+	line-height: $global-paragraph-line-height;
+}
+
+a:not(.button) {
+	text-decoration: underline;
+	color: $a-color;
+}
+
+a:is(.button) {
+	text-decoration: none;
+}
+
+ul {
+	list-style: none;
+}
+
+input,
+button,
+a.button,
+select,
+textarea {
+	font-family: inherit;
+	font-size: $global-font-size;
+}
+
+input:where([type='radio'], [type='checkbox']) {
+	accent-color: $global-accent-color;
+}
+
+textarea {
+	white-space: pre-wrap;
+}
+
+img,
+video {
+	display: block;
+	width: 100%;
+	height: 100%;
+
+	object-fit: cover;
+	border-radius: inherit;
+
+	background-color: black;
+}
+
+canvas {
+	display: inline-block;
+	image-rendering: pixelated;
+	image-rendering: crisp-edges;
+}
+
+// Misc
+[class*='flex'] {
+	display: flex;
+}
+
+[class*='grid'] {
+	display: grid;
+}
+
+[data-mobile] {
+	display: none !important;
+}
+
+[data-hide='true'] {
+	display: none !important;
+}
+
+[data-visible='false'] {
+	visibility: hidden !important;
+}
+
+[data-disabled='true'] {
+	opacity: 0.5;
+	pointer-events: none;
+	user-select: none;
+
+	transition: opacity 1s ease-in-out;
+}

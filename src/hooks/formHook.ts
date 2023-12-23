@@ -1,9 +1,15 @@
-import { Dispatch, SetStateAction, useState } from "react"
+import { Dispatch, SetStateAction, useEffect, useState } from "react"
 
 type T_FormHookUpdateFn = (e: HTMLInputElement, setter: Dispatch<SetStateAction<any>>) => void;
-export function useFormHook(): [T_FormHookUpdateFn, boolean] {
+export function useFormHook(form: Record<string, any>): [T_FormHookUpdateFn, boolean] {
     const [inputs, setInputs] = useState<Record<string, boolean>>({});
     const [isFormValid, setIsFormValid] = useState(false);
+
+    // Register form
+    useEffect(() => {
+        setInputs(Object.fromEntries(Object.keys(form).map(key => [key, false])));
+    }, []);
+    console.log(inputs)
 
     const updateInput = (e: HTMLInputElement, setter: Dispatch<SetStateAction<any>>) => {
         setter((prev: Record<any, any>) => {
