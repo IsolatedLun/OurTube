@@ -7,7 +7,6 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-
     "postcss-run": "postcss ./src/app/sassy.css -o ./src/app/output.css --watch"
   },
   "dependencies": {

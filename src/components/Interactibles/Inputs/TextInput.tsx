@@ -5,7 +5,7 @@ import { ChangeEvent, useEffect, useState } from "react"
 import { T_TextInput } from "../../../utils/input/types";
 import { runValidators } from "../utils";
 
-export default function Input({ input } : { input: T_TextInput }) {
+export default function TextInput({ input, showLabel = true } : { input: T_TextInput, showLabel?: boolean }) {
     useEffect(() => {
         setId(crypto.randomUUID());
     }, []);
@@ -25,25 +25,40 @@ export default function Input({ input } : { input: T_TextInput }) {
     }
 
     return (
-        <div className={css("input-container").extend(input.cls).class}>
-            <label className={css("input-container__label").class} htmlFor={id}>{input.label}: </label>
+        <div 
+            className={css("input-container", "flex flex-direction-column gap-1").extend(input.cls).class}
+
+            data-variant="primary"
+        >
+            <label 
+                className={css("input-container__label", showLabel ? "" : "visually-hidden").class} 
+                htmlFor={id}
+            >
+                {input.label}
+            </label>
             <input 
-                className={css("input-container__input").class} 
+                className={css("input-container__input", "width-100").class} 
                 onChange={handleInput} id={id} 
                 
                 name={input.name}
+                placeholder={input.placeholder}
                 type={input.inputType} 
 
                 data-valid={isValid}
                 data-attachments={input.attachments?.join(',')}
             />
-            <ul className={css("input-container__error-list").class}>
-                {
-                    (errors.length > 0) 
-                    ? errors.map(err => <li>{err}</li>) 
-                    : ""
-                }
-            </ul>
+            {
+                errors.length > 0
+                ? 
+                (
+                    <ul className={css("input-container__error-list", "margin-inline-start-4").class}>
+                        {
+                            errors.map(err => <li className="clr-misc-text-error">{err}</li>) 
+                        }
+                    </ul>
+                )
+                : null
+            }
         </div>
     )
 }

@@ -12,6 +12,7 @@ export type T_InputAttachments = ""
 export interface T_Input {
     cls?: T_CSS;
     label: string;
+    placeholder: string;
     name: string;
     
     validators: T_InputValidator[];

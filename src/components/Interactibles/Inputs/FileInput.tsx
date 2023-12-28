@@ -5,7 +5,7 @@ import { ChangeEvent, useEffect, useState } from "react"
 import { T_FileInput } from "../../../utils/input/types";
 import { runValidators } from "../utils";
 
-export default function Input({ input } : { input: T_FileInput }) {
+export default function FileInput({ input, showLabel = true } : { input: T_FileInput, showLabel: boolean }) {
     useEffect(() => {
         setId(crypto.randomUUID());
     }, []);
@@ -26,7 +26,12 @@ export default function Input({ input } : { input: T_FileInput }) {
 
     return (
         <div className={css("input-container file-input-container").extend(input.cls).class}>
-            <label className={css("input-container__label").class} htmlFor={id}>{input.label}: </label>
+            <label 
+                className={css("input-container__label", showLabel ? "" : "visually-hidden").class} 
+                htmlFor={id}
+            >
+                {input.label}
+            </label>
             <input 
                 className={css("input-container__input").class} 
                 onChange={handleInput} id={id} 

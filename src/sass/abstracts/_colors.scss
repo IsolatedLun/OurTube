@@ -1,14 +1,26 @@
 $colors-dark: (
 	primary: (
-		400: hsl(206 100% 45%)
+		400: hsl(223, 90%, 80%),
+		transparent-5: hsl(223 90% 80% / 0.05),
+		transparent-10: hsl(223 90% 80% / 0.1)
 	),
-	neutral: (
+	secondary: (
+		400: hsl(0, 0%, 76%),
+		transparent-5: hsl(0 0% 76% / 0.05),
+	),
+	misc: (
+		text-muted: hsl(0, 0%, 51%),
+		text-dark: hsl(0, 0%, 12%),
+		text-error: hsl(0, 60%, 62%),
+		youtube-red: hsl(0, 60%, 51%),
+		skeleton: hsl(0, 0%, 20%),
+
+		page-background: hsl(0, 0%, 8%),
+	),
+	card: (
 		400: hsl(0, 0%, 12%),
-		500: hsl(0 0 30%),
-		600: hsl(0 0 40%),
-		700: hsl(0 0 50%),
-		800: hsl(0 0 60%),
-	)
+		500: hsl(0, 0%, 16%)
+	),
 );
 
 $colors-light: ();

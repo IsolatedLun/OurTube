@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState, Children, ReactNode } from "react"
+import React, { useEffect, useState, ReactNode } from "react"
 import { T_Button } from "./types";
 import { css } from "@/utils/css/css";
 
@@ -20,7 +20,7 @@ export default function Button({ children, button } : { children: ReactNode, but
 
             onClick={(e) => button.onClick(e)}
         >
-            {Children.map(children, child => child)}
+            {children}
         </button>
     )
 }

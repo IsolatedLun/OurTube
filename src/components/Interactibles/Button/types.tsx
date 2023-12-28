@@ -1,7 +1,7 @@
 import { T_CSS } from "@/utils/css/types";
 
-export type T_ButtonVariant = "primary";
-export type T_ButtonAttachment = "";
+export type T_ButtonVariant = "primary" | "secondary";
+export type T_ButtonAttachment = "capsule";
 export interface T_Button {
     class?: T_CSS;
     variant: T_ButtonVariant;
