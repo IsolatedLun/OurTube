@@ -21,7 +21,7 @@ $global-background: none;
 $global-font-size: var(--fs-400);
 $global-font-family: $global-primary-font, system-ui;
 
-$border-radius-bevelled: 6px;
+$border-radius-bevelled: 4px;
 $border-radius-max: 100vmax;
 
 $z-index-10: 999;
@@ -53,7 +53,7 @@ $a-color: $clr-primary-400;
 $button-primary: $clr-primary-400;
 $button-border-radius: $border-radius-bevelled;
 
-$button-padding: 0.5rem 0.85rem;
+$button-padding: 0.4rem 0.85rem;
 $button-padding-tiny: 0.1rem 0.6rem;
 $button-padding-small: 0.25rem 0.8rem;
 $button-padding-big: 0.6rem 1.2rem;

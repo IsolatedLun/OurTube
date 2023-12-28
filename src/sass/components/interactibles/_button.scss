@@ -4,6 +4,7 @@
 @mixin createButton($background) {
     padding: $button-padding;
     background-color: $background;
+    font-weight: 500;
 
     border: $button-border-thickness solid $background;
     border-radius: $button-border-radius;
