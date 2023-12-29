@@ -1,0 +1,8 @@
+@use '../abstracts/' as *;
+
+.line {
+    height: $line-height;
+    width: $line-thickness;
+    
+    background-color: $line-background;
+}

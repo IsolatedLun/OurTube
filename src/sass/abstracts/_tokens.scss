@@ -22,16 +22,16 @@ $clr-card-400: map-get(map-get($active-theme, 'card'), 400);
 $clr-card-500: map-get(map-get($active-theme, 'card'), 500);
 
 // Global
-// @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@200;300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@200;300;400;500;600&display=swap');
 
-$global-primary-font: system-ui;
+$global-primary-font: "Rubik";
 $global-color-scheme: dark;
 
 $global-background: $clr-page-background;
 $global-font-size: var(--fs-400);
 $global-font-family: $global-primary-font, system-ui;
 
-$border-radius-bevelled: 1rem;
+$border-radius-bevelled: 0.75rem;
 $border-radius-max: 100vmax;
 
 $z-index-10: 999;
@@ -84,11 +84,15 @@ $button-anim-overlay-duration: 0.35s;
 $input-primary: $clr-card-500;
 $input-primary-text: $clr-text-muted;
 
-$input-padding: 0.475rem 0.8rem;
-$input-border-radius: 8px;
+$input-padding: 0.6rem 0.8rem;
+$input-border-radius: $border-radius-bevelled;
 
-$input-box-shadow: 0 0 1px 3px;
 $input-border-thickness: 2px;
-$input-end-icon-left: 92%;
-$input-end-icon-brightness: 55%;
-$input-border-color-transition-duration: 244ms;
+
+// Line
+$line-height: 2rem;
+$line-thickness: 2px;
+$line-background: $clr-text-dark;
+
+// Home
+$home-grid: 20% auto;

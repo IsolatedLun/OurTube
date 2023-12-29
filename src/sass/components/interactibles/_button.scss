@@ -11,6 +11,7 @@
     border-radius: $button-border-radius;
     text-wrap: nowrap;
 
+    outline-color: $text;
     cursor: pointer;
 
     &:is(:focus-visible, :hover) {

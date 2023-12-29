@@ -30,7 +30,11 @@ $box-values: column, row;
 	}
 }
 
-:is(.flex, .grid)[data-grow='true'] > * {
+ul:where(.flex, .grid) {
+	list-style: none;
+}
+
+:where(.flex, .grid)[data-grow='true'] {
 	width: 100%;
 }
 

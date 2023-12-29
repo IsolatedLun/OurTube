@@ -26,7 +26,7 @@ export default function TextInput({ input, showLabel = true } : { input: T_TextI
 
     return (
         <div 
-            className={css("input-container", "flex flex-direction-column gap-1").extend(input.cls).class}
+            className={css("input-container", "flex flex-direction-column gap-1 width-100").extend(input.cls).class}
 
             data-variant="primary"
         >
@@ -37,7 +37,7 @@ export default function TextInput({ input, showLabel = true } : { input: T_TextI
                 {input.label}
             </label>
             <input 
-                className={css("input-container__input", "width-100").class} 
+                className={css("input-container__input").class} 
                 onChange={handleInput} id={id} 
                 
                 name={input.name}

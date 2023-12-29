@@ -1,0 +1,6 @@
+@use '../abstracts/' as *;
+
+.home {
+    display: grid;
+    grid-template-columns: $home-grid;
+}

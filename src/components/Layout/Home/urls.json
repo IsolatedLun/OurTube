@@ -1,0 +1,58 @@
+
+[
+    {
+        "section": "Categories",
+        "urls": [
+            {
+                "name": "Home",
+                "url": "/",
+                "icon": "\uf015"
+            },
+            {
+                "name": "Shorts",
+                "url": "/shorts",
+                "icon": "\uf3e0"
+            }
+        ]
+    },
+    {
+        "section": "You",
+        "urls": [
+            {
+                "name": "My Channel",
+                "url": "/my/channel",
+                "icon": "\uf007"
+            },
+            {
+                "name": "Subscriptions",
+                "url": "/my/subscriptions",
+                "icon": "\uf07c"
+            },
+            {
+                "name": "History",
+                "url": "/my/history",
+                "icon": "\uf017"
+            },
+            {
+                "name": "Saved",
+                "url": "/my/saved",
+                "icon": "\uf02e"
+            }
+        ]
+    },
+    {
+        "section": "Misc",
+        "urls": [
+            {
+                "name": "Settings",
+                "url": "/my/settings",
+                "icon": "\uf013"
+            },
+            {
+                "name": "Log out",
+                "url": "/logout",
+                "icon": "\uf2f6"
+            }
+        ]
+    }
+]
