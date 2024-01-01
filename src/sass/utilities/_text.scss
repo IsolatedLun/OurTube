@@ -19,6 +19,10 @@
 	white-space: pre-line;
 }
 
+.whitespace-nowrap {
+	white-space: nowrap;
+}
+
 // Screen readers
 .visually-hidden {
 	clip: rect(0 0 0 0);

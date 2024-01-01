@@ -3,8 +3,11 @@ import TextInput from "@/components/Interactibles/Inputs/TextInput";
 import Flex from "@/components/Modules/Flex/Flex";
 import Line from "@/components/Modules/Line";
 import { css } from "@/utils/css/css";
+import { useSession } from "next-auth/react";
 
 export default function Navbar() {
+    const { data: session } = useSession();
+
     return(
         <Flex tag='nav' cls={css("primary-navigation")} gap={4} align="start" justify="space-between" grow={false}>
             <Flex cls={css(null, 'width-100')} gap={2}>
@@ -23,6 +26,7 @@ export default function Navbar() {
             <Flex tag='ul' grow={false} gap={2}>
                 <li>
                     <Button button={{
+                        cls: css(null, "whitespace-nowrap"),
                         variant: 'secondary',
                         attachments: [],
                         onClick: () => null,
@@ -35,6 +39,7 @@ export default function Navbar() {
                 </li>
                 <li>
                     <Button button={{
+                        cls: css(null, "whitespace-nowrap"),
                         variant: 'secondary',
                         attachments: [],
                         onClick: () => null,

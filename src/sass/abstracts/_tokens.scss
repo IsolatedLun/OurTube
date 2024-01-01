@@ -17,6 +17,8 @@ $clr-secondary-transparent-5: map-get(map-get($active-theme, 'secondary'), 'tran
 $clr-text-dark: map-get(map-get($active-theme, 'misc'), 'text-dark');
 $clr-text-muted: map-get(map-get($active-theme, 'misc'), 'text-muted');
 $clr-page-background: map-get(map-get($active-theme, 'misc'), 'page-background');
+$clr-error: map-get(map-get($active-theme, 'misc'), 'error');
+$clr-error-transparent-5: map-get(map-get($active-theme, 'misc'), 'error-transparent-5');
 
 $clr-card-400: map-get(map-get($active-theme, 'card'), 400);
 $clr-card-500: map-get(map-get($active-theme, 'card'), 500);
@@ -62,12 +64,17 @@ $a-color: $clr-primary-400;
 // Button
 $button-primary: $clr-primary-transparent-5;
 $button-primary-text: $clr-primary-400;
+
 $button-secondary: $clr-secondary-transparent-5;
 $button-secondary-text: $clr-secondary-400;
 
-$button-border-radius: $border-radius-bevelled;
+$button-error: $clr-error-transparent-5;
+$button-error-text: $clr-error;
 
-$button-padding: 0.8rem 1rem;
+
+$button-border-radius: $border-radius-max;
+
+$button-padding: 0.8rem 1.2rem;
 $button-padding-tiny: 0.1rem 0.6rem;
 $button-padding-small: 0.25rem 0.8rem;
 $button-padding-big: 0.6rem 1.2rem;
@@ -84,8 +91,8 @@ $button-anim-overlay-duration: 0.35s;
 $input-primary: $clr-card-500;
 $input-primary-text: $clr-text-muted;
 
-$input-padding: 0.6rem 0.8rem;
-$input-border-radius: $border-radius-bevelled;
+$input-padding: 0.6rem 1.25rem;
+$input-border-radius: $border-radius-max;
 
 $input-border-thickness: 2px;
 
@@ -95,4 +102,4 @@ $line-thickness: 2px;
 $line-background: $clr-text-dark;
 
 // Home
-$home-grid: 20% auto;
+$home-grid: max-content auto;

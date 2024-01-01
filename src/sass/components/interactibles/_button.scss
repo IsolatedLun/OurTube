@@ -50,4 +50,8 @@
     &[data-variant='secondary'] {
         @include createButton($button-secondary, $button-secondary-text);
     }
+
+    &[data-variant='error'] {
+        @include createButton($button-error, $button-error-text);
+    }
 }

@@ -47,11 +47,6 @@
                 "name": "Settings",
                 "url": "/my/settings",
                 "icon": "\uf013"
-            },
-            {
-                "name": "Log out",
-                "url": "/logout",
-                "icon": "\uf2f6"
             }
         ]
     }

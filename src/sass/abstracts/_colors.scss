@@ -16,6 +16,8 @@ $colors-dark: (
 		skeleton: hsl(0, 0%, 20%),
 
 		page-background: hsl(0, 0%, 8%),
+		error: hsl(0 59% 59%),
+		error-transparent-5: hsl(0 59% 59% / 0.05)
 	),
 	card: (
 		400: hsl(0, 0%, 12%),
