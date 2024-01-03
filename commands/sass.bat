@@ -1,1 +1,1 @@
-cd .. && cd src && cd sass && sass styles.scss ../app/sassy.css --watch
+cd .. && cd src && cd sass && sass styles.scss ../app/static/sassy.css --watch

@@ -12,11 +12,11 @@ export default function HomeAside() {
         <Flex tag="aside" column={true} align="start" gap={3}>
             {
                 urls.map((section, i) => (
-                    <Flex column={true} align="start">
+                    <Flex key={i} column={true} align="start">
                         <p className="clr-misc-text-muted fw-bold">{section.section}</p>
                         {
-                            section.urls.map(val => (
-                                <Button button={{ 
+                            section.urls.map((val, j) => (
+                                <Button key={i + j} button={{ 
                                     variant: 'primary',
                                     cls: css(null, "fs-350 width-100"),
                                     to: val.url

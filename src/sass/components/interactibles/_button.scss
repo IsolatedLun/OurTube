@@ -40,6 +40,10 @@
     &[data-attachments*='capsule'] {
         border-radius: $border-radius-max;
     }
+
+    &[data-attachments*='block'] {
+        border-radius: $border-radius-block;
+    }
 }
 
 .button {

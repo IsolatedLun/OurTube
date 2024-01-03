@@ -11,7 +11,9 @@ export default function Button({ children, button } : { children: ReactNode, but
     const [id, setId] = useState('');
 
     const Tag = button.to ? 'a' : 'button' as keyof JSX.IntrinsicElements;
-    const buttonProps = button.to ? {"href": button.to} : {};
+    const buttonHrefProp = button.to ? {"href": button.to} : {};
+    const buttonTypeProp =  button.to ? {} : {type: button.type ?? "button"};
+    const buttonProps = { ...buttonHrefProp, ...buttonTypeProp } as any;
 
     return (
         <Tag 

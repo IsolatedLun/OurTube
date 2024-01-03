@@ -34,7 +34,7 @@ export const evalSpecialCharacters: T_InputValidatorCallback<[string[], boolean]
 (chars: string[], allowed: boolean) => 
 (value: string) => {
     return {
-        error: `Special character(s) [${chars}] are ${allowed ? "" : "not"} allowed.`,
+        error: `Special character(s) [${chars}] are ${allowed ? "" : "not"} ${allowed ? "required" : "allowed"}.`,
         validate: () => Array.from(value).some(ch => chars.includes(ch)) && allowed
     };
 }

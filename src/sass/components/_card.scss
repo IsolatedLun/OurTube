@@ -1,0 +1,13 @@
+@use '../abstracts/' as *;
+
+.card {
+    background-color: $clr-card-400;
+    border: $card-border-thickness solid $clr-card-500;
+    border-radius: $card-border-radius;
+
+    box-shadow: $default-shadow;
+}
+
+:where(.card) {
+    padding: $card-padding;
+}

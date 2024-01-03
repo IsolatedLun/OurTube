@@ -10,7 +10,7 @@ export default function TextInput({ input, showLabel = true } : { input: T_TextI
         setId(crypto.randomUUID());
     }, []);
 
-    const [id, setId] = useState('');
+    const [id, setId] = useState(input.name);
     const [isValid, setIsValid] = useState(false);
     const [errors, setErrors] = useState<string[]>([]);
 
@@ -46,6 +46,7 @@ export default function TextInput({ input, showLabel = true } : { input: T_TextI
 
                 data-valid={isValid}
                 data-attachments={input.attachments?.join(',')}
+                
             />
             {
                 errors.length > 0

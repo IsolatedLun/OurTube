@@ -2074,7 +2074,7 @@ p {
 }
 
 a:not(.button) {
-  text-decoration: underline;
+  text-decoration: none;
   color: hsl(223, 90%, 80%);
 }
 
@@ -2805,13 +2805,16 @@ ul:where(.flex, .grid) {
   padding: 0.25rem 0.8rem;
 }
 .button[data-variant=primary][data-attachments*=big-pad] {
-  padding: 0.6rem 1.2rem;
+  padding: 1rem 1.2rem;
 }
 .button[data-variant=primary][data-attachments*=huge-pad] {
   padding: 0.85rem 1.4rem;
 }
 .button[data-variant=primary][data-attachments*=capsule] {
   border-radius: 100vmax;
+}
+.button[data-variant=primary][data-attachments*=block] {
+  border-radius: 0.25rem;
 }
 .button[data-variant=secondary] {
   font-weight: bold;
@@ -2835,13 +2838,16 @@ ul:where(.flex, .grid) {
   padding: 0.25rem 0.8rem;
 }
 .button[data-variant=secondary][data-attachments*=big-pad] {
-  padding: 0.6rem 1.2rem;
+  padding: 1rem 1.2rem;
 }
 .button[data-variant=secondary][data-attachments*=huge-pad] {
   padding: 0.85rem 1.4rem;
 }
 .button[data-variant=secondary][data-attachments*=capsule] {
   border-radius: 100vmax;
+}
+.button[data-variant=secondary][data-attachments*=block] {
+  border-radius: 0.25rem;
 }
 .button[data-variant=error] {
   font-weight: bold;
@@ -2865,13 +2871,16 @@ ul:where(.flex, .grid) {
   padding: 0.25rem 0.8rem;
 }
 .button[data-variant=error][data-attachments*=big-pad] {
-  padding: 0.6rem 1.2rem;
+  padding: 1rem 1.2rem;
 }
 .button[data-variant=error][data-attachments*=huge-pad] {
   padding: 0.85rem 1.4rem;
 }
 .button[data-variant=error][data-attachments*=capsule] {
   border-radius: 100vmax;
+}
+.button[data-variant=error][data-attachments*=block] {
+  border-radius: 0.25rem;
 }
 
 .input-container[data-variant=primary] .input-container__input {
@@ -2891,6 +2900,21 @@ ul:where(.flex, .grid) {
 .home {
   display: grid;
   grid-template-columns: max-content auto;
+}
+
+.card {
+  background-color: hsl(0, 0%, 12%);
+  border: 3px solid hsl(0, 0%, 16%);
+  border-radius: 0.75rem;
+  box-shadow: 0px 0px 16px 2px rgba(0, 0, 0, 0.3);
+}
+
+:where(.card) {
+  padding: 1rem 1.25rem;
+}
+
+.auth-container .card {
+  max-width: 500px;
 }
 
 .line {

@@ -1,7 +1,10 @@
+"use client";
+
 import Button from "@/components/Interactibles/Button/Button";
 import TextInput from "@/components/Interactibles/Inputs/TextInput";
 import Flex from "@/components/Modules/Flex/Flex";
 import Line from "@/components/Modules/Line";
+import { pb } from "@/utils/backend";
 import { css } from "@/utils/css/css";
 import { useSession } from "next-auth/react";
 
@@ -9,9 +12,11 @@ export default function Navbar() {
     const { data: session } = useSession();
 
     return(
-        <Flex tag='nav' cls={css("primary-navigation")} gap={4} align="start" justify="space-between" grow={false}>
+        <Flex tag='nav' cls={css("primary-navigation")} gap={4} align="center" justify="space-between" grow={false}>
             <Flex cls={css(null, 'width-100')} gap={2}>
-                <h1>OurTube</h1>
+                <h1>
+                    <a href="/">OurTube</a>
+                </h1>
                 <TextInput 
                     input={{
                         label: 'Search videos & shorts',
@@ -29,7 +34,7 @@ export default function Navbar() {
                         cls: css(null, "whitespace-nowrap"),
                         variant: 'secondary',
                         attachments: [],
-                        onClick: () => null,
+                        to: '/auth/signup'
                     }}>
                         Sign up
                     </Button>
@@ -42,7 +47,7 @@ export default function Navbar() {
                         cls: css(null, "whitespace-nowrap"),
                         variant: 'secondary',
                         attachments: [],
-                        onClick: () => null,
+                        to: '/auth/login'
                     }}>
                         Log in
                     </Button>
