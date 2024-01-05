@@ -1,0 +1,28 @@
+@use '../abstracts/' as *;
+
+.video-tab {
+    grid-template-columns: $video-tab-grid;
+
+    &__video-player {
+        --video-player-overlay: #{$clr-primary-400};
+        position: relative;
+        border-radius: $video-player-border-radius;
+
+        &::after {
+            @include pseudoElement();
+            
+            inset: 0;
+            background-color: var(--video-player-overlay, transparent);
+            filter: blur($video-player-overlay-blur);
+            opacity: $video-player-overlay-opacity;
+            
+            z-index: -1;
+        }
+    }
+
+    &__video-player video {
+        aspect-ratio: 16 / 9;
+        object-fit: contain;
+        background-color: black;
+    }
+}

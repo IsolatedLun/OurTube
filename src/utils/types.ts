@@ -1,6 +1,6 @@
 export type Some<T> = T | null;
 
-export interface T_Collection {
+export interface T_CollectionItem {
     id: string;
     collectionId: string;
     created: string;

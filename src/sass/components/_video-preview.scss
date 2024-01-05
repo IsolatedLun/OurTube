@@ -1,19 +1,12 @@
 @use '../abstracts/' as *;
 
 .video-previews-grid {
-    grid-template-columns: repeat(auto-fill, minmax(244px, 1fr));
+    grid-template-columns: $video-preview-grid;
 }
 
 .video-preview {
     &__thumbnail {
         aspect-ratio: 16 / 9;
-        height: max-content;
-        border-radius: $border-radius-block;
-    }
-
-    .user-profile {
-        aspect-ratio: 1;
-        max-width: 2.75rem;
-        border-radius: $border-radius-max;
+        border-radius: $video-preview-border-radius;
     }
 }

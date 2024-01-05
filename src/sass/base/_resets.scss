@@ -38,10 +38,12 @@ h4,
 h5,
 h6 {
 	line-height: $global-heading-line-height;
+	text-wrap: balance;
 }
 
 p {
 	line-height: $global-paragraph-line-height;
+	text-wrap: pretty;
 }
 
 a:not(.button) {

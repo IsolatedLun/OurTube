@@ -115,3 +115,21 @@ $card-border-thickness: 3px;
 
 // Auth
 $auth-max-width: 500px;
+
+// Video preview
+$video-preview-grid: repeat(auto-fill, minmax(244px, 1fr));
+$video-preview-border-radius: $border-radius-block;
+
+// Profile
+$profile-border-radius: $border-radius-max;
+
+$profile_comment: 2rem;
+$profile_video-preview: 2.75rem;
+$profile_video-tab: 3.15rem;
+$profile_channel: 4.55rem;
+
+// Video Tab
+$video-tab-grid: 67% auto;
+$video-player-border-radius: $border-radius-block;
+$video-player-overlay-blur: 64px;
+$video-player-overlay-opacity: 0.28;

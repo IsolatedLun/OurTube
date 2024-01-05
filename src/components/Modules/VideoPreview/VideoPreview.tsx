@@ -4,6 +4,7 @@ import { BACKEND_FILE_URL, MAX_VIDEO_TITLE_LINES, CHANNEL_URL, VIDEO_URL } from 
 import Flex from "../Flex/Flex";
 import Numeric from "../Numeric/Numeric";
 import Link from "next/link";
+import Profile from "../Profile/Profile";
 
 export default function VideoPreview({ props } : { props: T_VideoPreview }) {
     console.log(props)
@@ -17,18 +18,16 @@ export default function VideoPreview({ props } : { props: T_VideoPreview }) {
                     alt={"Thumbnail of " + props.title} 
                 />
             </Link>
-            <Flex cls={css("video-preview__details")} gap={1}>
+            <Flex cls={css("video-preview__details")} align="start" gap={1}>
                 <Link href={CHANNEL_URL(props.expand.channel.id)}>
-                    <img  
-                        className={css("user-profile").class}
-                        src={BACKEND_FILE_URL(
-                                props.expand.channel.collectionId, 
-                                props.expand.channel.id, 
-                                props.expand.channel.profile
+                    <Profile 
+                        url={BACKEND_FILE_URL(
+                            props.expand.channel.collectionId, 
+                            props.expand.channel.id, 
+                            props.expand.channel.profile
                         )} 
-                        alt={"Profile of" + props.expand.channel.name} 
-
-                        data-variant="video-preview"
+                        alt={"Profile of" + props.expand.channel.name}
+                        variant="video-preview"
                     />
                 </Link>
                 

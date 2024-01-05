@@ -17,6 +17,10 @@
     &:is(:focus-visible, :hover) {
         background-color: $text;
         color: $clr-text-dark;
+
+        * {
+            color: inherit;
+        }
     }
 
     // Padding

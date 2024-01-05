@@ -1,10 +1,7 @@
-import { T_Channel } from "@/components/Layout/Channel/types";
-import { T_User } from "@/utils/backend/types";
-import { T_Collection } from "@/utils/types";
+import { T_VideoPreviewChannel } from "@/components/Layout/Channel/types";
+import { T_CollectionItem } from "@/utils/types";
 
-export interface T_VideoPreview extends T_Collection {
-    user: Omit<T_User, "email">;
-
+export interface T_VideoPreview extends T_CollectionItem {
     thumbnail: string;
     title: string;
     
@@ -12,6 +9,6 @@ export interface T_VideoPreview extends T_Collection {
     views: number;
 
     expand: {
-        channel: T_Channel;
+        channel: T_VideoPreviewChannel;
     }
 }

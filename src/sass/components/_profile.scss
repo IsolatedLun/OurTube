@@ -1,0 +1,22 @@
+@use '../abstracts/' as *;
+
+.profile {
+    aspect-ratio: 1;
+    border-radius: $profile-border-radius;
+
+    &[data-variant='comment'] {
+        width: $profile_comment;
+    }
+
+    &[data-variant='video-preview'] {
+        width: $profile_video-preview;
+    }
+
+    &[data-variant='video-tab'] {
+        width: $profile_video-tab;
+    }
+
+    &[data-variant='channel'] {
+        width: $profile_channel;
+    }
+}

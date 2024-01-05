@@ -1,0 +1,1 @@
+export type T_ProfileVariant = "comment" | "video-preview" | "video-tab" | "channel";
