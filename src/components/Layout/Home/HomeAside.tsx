@@ -2,7 +2,7 @@ import Button from "@/components/Interactibles/Button/Button";
 import Flex from "@/components/Modules/Flex/Flex";
 import { css } from "@/utils/css/css";
 import urls from './urls.json';
-import { ICON_SIGN_OUT } from "@/components/icons";
+import { ICON_SIGN_OUT } from "@/icons";
 import { signOut, useSession } from "next-auth/react";
 
 export default function HomeAside() {

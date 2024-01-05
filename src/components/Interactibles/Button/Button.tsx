@@ -2,32 +2,38 @@
 import React, { useEffect, useState, ReactNode } from "react"
 import { T_Button } from "./types";
 import { css } from "@/utils/css/css";
+import Link from "next/link";
 
 export default function Button({ children, button } : { children: ReactNode, button: T_Button }) {
+    function _Button() {
+        return (
+            <button 
+                id={id} 
+                className={css("button").extend(button.cls).class}
+    
+                data-variant={button.variant}
+                data-attachments={button.attachments?.join(',')}
+    
+                onClick={(e) => button.onClick ? button.onClick(e as any) : null}
+            >
+                {children}
+            </button>
+        )
+    }
+
     useEffect(() => {
         setId(crypto.randomUUID());
     }, []);
 
     const [id, setId] = useState('');
 
-    const Tag = button.to ? 'a' : 'button' as keyof JSX.IntrinsicElements;
-    const buttonHrefProp = button.to ? {"href": button.to} : {};
-    const buttonTypeProp =  button.to ? {} : {type: button.type ?? "button"};
-    const buttonProps = { ...buttonHrefProp, ...buttonTypeProp } as any;
+    if(button.to) {
+        return (
+            <Link className={css(null, "display-block width-100").class} href={button.to}>
+                <_Button />
+            </Link>
+        )
+    }
 
-    return (
-        <Tag 
-            id={id} 
-            className={css("button").extend(button.cls).class}
-
-            data-variant={button.variant}
-            data-attachments={button.attachments?.join(',')}
-
-            onClick={(e) => button.onClick ? button.onClick(e as any) : null}
-
-            {...buttonProps}
-        >
-            {children}
-        </Tag>
-    )
+    return <_Button />
 }

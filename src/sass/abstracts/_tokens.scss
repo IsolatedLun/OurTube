@@ -19,6 +19,7 @@ $clr-text-muted: map-get(map-get($active-theme, 'misc'), 'text-muted');
 $clr-page-background: map-get(map-get($active-theme, 'misc'), 'page-background');
 $clr-error: map-get(map-get($active-theme, 'misc'), 'error');
 $clr-error-transparent-5: map-get(map-get($active-theme, 'misc'), 'error-transparent-5');
+$clr-skeleton: hsl(0 0% 20%);
 
 $clr-card-400: map-get(map-get($active-theme, 'card'), 400);
 $clr-card-500: map-get(map-get($active-theme, 'card'), 500);
@@ -35,7 +36,7 @@ $global-font-family: $global-primary-font, system-ui;
 
 $border-radius-bevelled: 0.75rem;
 $border-radius-max: 100vmax;
-$border-radius-block: 0.25rem;
+$border-radius-block: 0.45rem;
 
 $default-shadow: 0px 0px 16px 2px rgba(0 0 0 / 0.3);
 

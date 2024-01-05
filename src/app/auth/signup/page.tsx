@@ -7,6 +7,8 @@ import Icon from "@/components/Modules/Icon";
 import SignUpForm from "@/components/Layout/Auth/SignUp/SignupForm";
 import { pb } from "@/utils/backend";
 import { useRouter } from "next/navigation";
+import { AUTH_LOGIN_URL } from "@/consts";
+import Link from "next/link";
 
 export default function SignUp() {
     const router = useRouter();
@@ -22,11 +24,14 @@ export default function SignUp() {
         <h2 className={css(null, "text-align-center").class}>Sign Up</h2>
         <SignUpForm />
 
-        <a href="/auth/login" className={css(null, "display-block margin-block-start-2").class}>
+        <Link 
+            href={AUTH_LOGIN_URL} 
+            className={css(null, "display-block margin-block-start-2").class}
+        >
             Already have an account?
-        </a>
+        </Link>
 
-        <Flex cls={css(null, "margin-block-start-2")}>
+        <Flex cls={css(null, "margin-block-start-3")}>
             <p>Continue with: </p>
             <Button button={{
                 variant: 'secondary',

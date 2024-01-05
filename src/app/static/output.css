@@ -2106,7 +2106,7 @@ video {
   height: 100%;
   object-fit: cover;
   border-radius: inherit;
-  background-color: black;
+  background-color: hsl(0, 0%, 20%);
 }
 
 canvas {
@@ -2814,7 +2814,7 @@ ul:where(.flex, .grid) {
   border-radius: 100vmax;
 }
 .button[data-variant=primary][data-attachments*=block] {
-  border-radius: 0.25rem;
+  border-radius: 0.45rem;
 }
 .button[data-variant=secondary] {
   font-weight: bold;
@@ -2847,7 +2847,7 @@ ul:where(.flex, .grid) {
   border-radius: 100vmax;
 }
 .button[data-variant=secondary][data-attachments*=block] {
-  border-radius: 0.25rem;
+  border-radius: 0.45rem;
 }
 .button[data-variant=error] {
   font-weight: bold;
@@ -2880,7 +2880,7 @@ ul:where(.flex, .grid) {
   border-radius: 100vmax;
 }
 .button[data-variant=error][data-attachments*=block] {
-  border-radius: 0.25rem;
+  border-radius: 0.45rem;
 }
 
 .input-container[data-variant=primary] .input-container__input {
@@ -2915,6 +2915,21 @@ ul:where(.flex, .grid) {
 
 .auth-container .card {
   max-width: 500px;
+}
+
+.video-previews-grid {
+  grid-template-columns: repeat(auto-fill, minmax(244px, 1fr));
+}
+
+.video-preview__thumbnail {
+  aspect-ratio: 16/9;
+  height: max-content;
+  border-radius: 0.45rem;
+}
+.video-preview .user-profile {
+  aspect-ratio: 1;
+  max-width: 2.75rem;
+  border-radius: 100vmax;
 }
 
 .line {
