@@ -9,10 +9,10 @@ export default function HomeAside() {
     const { data:session } = useSession();
 
     return(
-        <Flex tag="aside" column={true} align="start" gap={3}>
+        <Flex tag="aside" props={{ column: true, align: 'start', gap: 3 }}>
             {
                 urls.map((section, i) => (
-                    <Flex key={i} column={true} align="start">
+                    <Flex key={i} props={{ column: true, align: 'start', grow: true }}>
                         <p className="clr-misc-text-muted fw-bold">{section.section}</p>
                         {
                             section.urls.map((val, j) => (
@@ -21,7 +21,7 @@ export default function HomeAside() {
                                     cls: css(null, "fs-350 width-100"),
                                     to: val.url
                                 }}>
-                                    <Flex align="center" gap={2}>
+                                    <Flex props={{ align: 'start', gap: 2 }}>
                                         <div className="icon">{val.icon}</div>
                                         <p>{val.name}</p>
                                     </Flex>
@@ -37,7 +37,7 @@ export default function HomeAside() {
                                     cls: css(null, "fs-350 width-100"),
                                     onClick: () => signOut()
                                 }}>
-                                    <Flex align="center" gap={2}>
+                                    <Flex props={{ align: 'center', gap: 2 }}>
                                         <div className="icon">{ICON_SIGN_OUT}</div>
                                         <p>Log out</p>
                                     </Flex>

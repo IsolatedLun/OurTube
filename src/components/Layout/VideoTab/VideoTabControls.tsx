@@ -6,14 +6,14 @@ import Numeric from "@/components/Modules/Numeric/Numeric";
 
 export default function VideoTabControls({ video } : { video: T_VideoTab }) {
     return (
-        <Flex cls={css(null, "width-100")} justify="space-between">
+        <Flex cls={css(null, "width-100")} props={{ justify: 'space-between' }}>
             <Button button={{
                 variant: 'primary'
             }}>
                 Subscribe
             </Button>
 
-            <Flex cls={css(null, "width-100")} justify="end">
+            <Flex cls={css(null, "width-100")} props={{ justify: 'end' }}>
                 <Button button={{
                     variant: 'primary'
                 }}>

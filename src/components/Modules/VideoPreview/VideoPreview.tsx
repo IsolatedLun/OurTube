@@ -5,11 +5,12 @@ import Flex from "../Flex/Flex";
 import Numeric from "../Numeric/Numeric";
 import Link from "next/link";
 import Profile from "../Profile/Profile";
+import { dateToHumanReadableDateSpan } from "@/utils/utils";
 
 export default function VideoPreview({ props } : { props: T_VideoPreview }) {
     console.log(props)
     return (
-        <Flex cls={css("video-preview")} column={true}>
+        <Flex cls={css("video-preview")} props={{ column: true, align: 'start' }}>
             <Link href={VIDEO_URL(props.id)}>
                 <img 
                     className={css(null, "video-preview__thumbnail").class}
@@ -18,7 +19,7 @@ export default function VideoPreview({ props } : { props: T_VideoPreview }) {
                     alt={"Thumbnail of " + props.title} 
                 />
             </Link>
-            <Flex cls={css("video-preview__details")} align="start" gap={1}>
+            <Flex cls={css("video-preview__details")} props={{ align: 'start', gap: 1, grow: true }}>
                 <Link href={CHANNEL_URL(props.expand.channel.id)}>
                     <Profile 
                         url={BACKEND_FILE_URL(
@@ -39,10 +40,10 @@ export default function VideoPreview({ props } : { props: T_VideoPreview }) {
 
                     <Flex 
                         cls={css(null, "width-100 fs-350 clr-misc-text-muted")} 
-                        justify="space-between"
+                        props={{ justify: 'space-between' }}
                     >
                         <p><Numeric n={props.views} /> views</p>
-                        <p>{props.created}</p>
+                        <p>{dateToHumanReadableDateSpan(props.created)}</p>
                     </Flex>
                 </div>
             </Flex>

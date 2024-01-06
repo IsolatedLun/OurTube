@@ -25,4 +25,21 @@
         object-fit: contain;
         background-color: black;
     }
+
+    .video-tab__ratio-bar {
+        position: relative;
+        height: $video-player-ratio-bar-height;
+        width: $video-player-ratio-bar-width;
+        border-radius: $video-player-border-radius;
+        background-color: $video-player-background;
+
+        &::after {
+            @include pseudoElement();
+
+            width: calc(var(--ratio) * 100 * 1%);
+            border-radius: inherit;
+            height: 100%;
+            background-color: $video-player-foreground;
+        }
+    }
 }

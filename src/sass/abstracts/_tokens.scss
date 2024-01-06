@@ -132,4 +132,10 @@ $profile_channel: 4.55rem;
 $video-tab-grid: 67% auto;
 $video-player-border-radius: $border-radius-block;
 $video-player-overlay-blur: 64px;
-$video-player-overlay-opacity: 0.28;
+$video-player-overlay-opacity: 0.08;
+
+$video-player-background: $clr-primary-transparent-10;
+$video-player-foreground: $clr-primary-400;
+$video-player-ratio-bar-width: 144px;
+$video-player-ratio-bar-height: 7px;
+$video-player-border-radius: $border-radius-bevelled;

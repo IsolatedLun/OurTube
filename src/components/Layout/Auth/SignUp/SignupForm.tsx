@@ -25,7 +25,7 @@ export default function SignUpForm() {
 
     return (
         <form onSubmit={handleSubmit} className={css(null, "margin-block-start-2").class}>
-            <Flex column={true} gap={2} align="start">
+            <Flex props={{ column: true, align: 'start', gap: 2 }}>
                 <TextInput input={{
                     name: 'email',
                     label: 'Email Address',
@@ -51,7 +51,7 @@ export default function SignUpForm() {
                     onInput: (e) => inputSetter(e, setForm)
                 }} />
 
-                <Flex cls={css("", "margin-block-start-2")} column={true} align="start">
+                <Flex cls={css("", "margin-block-start-2")} props={{ column: true, align: 'start', grow: true }}>
                     <Button button={{
                         variant: 'secondary',
                         attachments: ['big-pad'],

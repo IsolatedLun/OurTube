@@ -10,6 +10,7 @@ import Button from "@/components/Interactibles/Button/Button";
 import Numeric from "@/components/Modules/Numeric/Numeric";
 import VideoTabControls from "./VideoTabControls";
 import VideoTabVideoPlayer from "./VideoTabVideoPlayer";
+import VideoTabVideoDetails from "./VideoTabVideoDetails";
 
 export default function VideoTab({ id } : { id: string }) {
     const [video, setVideo] = useState<Some<T_VideoTab>>(null);
@@ -26,10 +27,13 @@ export default function VideoTab({ id } : { id: string }) {
                 video
                 ? (
                     <section>
-                        <Flex column={true} align="start">
+                        <Flex props={{ align: 'start', column: true }}>
                             <VideoTabVideoPlayer video={video} />
                             <div className="margin-inline-1 width-100">
-                                <Flex cls={css(null, "margin-block-start-1")} align="start" gap={2}>
+                                <Flex 
+                                    cls={css(null, "margin-block-start-1")} 
+                                    props={{ align: 'start', gap: 2 }}
+                                >
                                     <Profile 
                                         alt={"Profile of " + video.expand.channel.name}
                                         url={BACKEND_FILE_URL(
@@ -41,12 +45,7 @@ export default function VideoTab({ id } : { id: string }) {
                                     />
                                     <h2>{video.title}</h2>
                                 </Flex>
-                                <Flex cls={css(null, "margin-block-start-1 margin-block-end-2")}>
-                                    <h3>{video.expand.channel.name}</h3>
-                                    <p className={css(null, "clr-misc-text-muted fw-bold").class}>
-                                        {video.expand.channel.subscribers}
-                                    </p>
-                                </Flex>
+                                <VideoTabVideoDetails video={video} />
                                 <VideoTabControls video={video} />
                             </div>
                         </Flex>

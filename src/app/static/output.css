@@ -2960,7 +2960,7 @@ ul:where(.flex, .grid) {
 .video-tab__video-player {
   --video-player-overlay: hsl(223, 90%, 80%);
   position: relative;
-  border-radius: 0.45rem;
+  border-radius: 0.75rem;
 }
 .video-tab__video-player::after {
   content: "";
@@ -2968,13 +2968,28 @@ ul:where(.flex, .grid) {
   inset: 0;
   background-color: var(--video-player-overlay, transparent);
   filter: blur(64px);
-  opacity: 0.28;
+  opacity: 0.08;
   z-index: -1;
 }
 .video-tab__video-player video {
   aspect-ratio: 16/9;
   object-fit: contain;
   background-color: black;
+}
+.video-tab .video-tab__ratio-bar {
+  position: relative;
+  height: 7px;
+  width: 144px;
+  border-radius: 0.75rem;
+  background-color: hsla(223, 90%, 80%, 0.1);
+}
+.video-tab .video-tab__ratio-bar::after {
+  content: "";
+  position: absolute;
+  width: calc(var(--ratio) * 100 * 1%);
+  border-radius: inherit;
+  height: 100%;
+  background-color: hsl(223, 90%, 80%);
 }
 
 .line {
