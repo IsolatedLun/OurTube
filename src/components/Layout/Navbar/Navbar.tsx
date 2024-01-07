@@ -12,8 +12,12 @@ export default function Navbar() {
     const { data: session } = useSession();
 
     return(
-        <Flex tag='nav' cls={css("primary-navigation")} gap={4} align="center" justify="space-between" grow={false}>
-            <Flex cls={css(null, 'width-100')} gap={2}>
+        <Flex 
+            tag='nav' 
+            props={{ align: 'center', justify: 'space-between', gap: 4 }}
+            cls={css("primary-navigation")} 
+        >
+            <Flex cls={css(null, 'width-100')} props={{ gap: 2 }}>
                 <h1>
                     <a href="/">OurTube</a>
                 </h1>
@@ -28,7 +32,7 @@ export default function Navbar() {
                     }} showLabel={false} 
                 />
             </Flex>
-            <Flex tag='ul' grow={false} gap={2}>
+            <Flex tag='ul' props={{ grow: false, gap: 2 }}>
                 <li>
                     <Button button={{
                         cls: css(null, "whitespace-nowrap"),

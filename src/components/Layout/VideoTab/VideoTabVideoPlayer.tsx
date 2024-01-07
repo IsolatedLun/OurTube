@@ -14,9 +14,12 @@ export default function VideoTabVideoPlayer({ video } : { video: T_VideoTab }) {
                     controls={true}
                 />
             </div>
-            <p className="margin-inline-start-1">
-                <Numeric n={video.views} /> views, {dateToHumanReadableDate(video.created)}
-            </p>
+            <Flex props={{ justify: 'space-between', grow: true }}>
+                <p className="margin-inline-start-1">
+                    <Numeric n={video.views} /> <span>{video.views === 1 ? 'view' : 'views'}</span>
+                </p>
+                <p className="clr-misc-text-muted">{dateToHumanReadableDate(video.created)}</p>
+            </Flex>
         </>
     )
 }

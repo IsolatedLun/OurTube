@@ -2991,6 +2991,9 @@ ul:where(.flex, .grid) {
   height: 100%;
   background-color: hsl(223, 90%, 80%);
 }
+.video-tab__description article {
+  line-height: 1.4;
+}
 
 .line {
   height: 2rem;

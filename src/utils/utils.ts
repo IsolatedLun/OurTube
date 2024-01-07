@@ -31,3 +31,12 @@ export function dateToHumanReadableDateSpan(dateString: string) {
 export function dateToHumanReadableDate(dateString: string) {
     return new Date(dateString).toDateString();
 }
+
+export function calculateLineCount(el: HTMLElement, fontSize: number) {
+    return el.scrollHeight / fontSize;
+}
+
+export function truncateToLineCount(el: HTMLElement, lineCount: number) {
+    const text = el.textContent!;
+    return text.substring(0, el.scrollWidth / 16 * (lineCount + 1)) + '...';
+}
