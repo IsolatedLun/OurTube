@@ -13,9 +13,7 @@ import Link from "next/link";
 export default function SignUp() {
     const router = useRouter();
     async function signUpWithOAuth(provider: string) {
-        pb.collection('users').authWithOAuth2({ provider }).finally(() => {
-            router.push('/');
-        });
+        const authData = await pb.collection('users').authWithOAuth2({ provider });
     }
 
 

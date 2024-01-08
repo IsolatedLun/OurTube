@@ -2796,18 +2796,18 @@ ul:where(.flex, .grid) {
   outline-color: hsl(223, 90%, 80%);
   cursor: pointer;
 }
-.button[data-variant=primary]:is(:focus-visible, :hover) {
+.button[data-variant=primary]:is(:focus-visible, :hover, [data-attachments*=full]) {
   background-color: hsl(223, 90%, 80%);
   color: hsl(0, 0%, 12%);
 }
-.button[data-variant=primary]:is(:focus-visible, :hover) * {
+.button[data-variant=primary]:is(:focus-visible, :hover, [data-attachments*=full]) * {
   color: inherit;
 }
 .button[data-variant=primary][data-attachments*=tiny-pad] {
   padding: 0.1rem 0.6rem;
 }
 .button[data-variant=primary][data-attachments*=small-pad] {
-  padding: 0.25rem 0.8rem;
+  padding: 0.45rem 0.8rem;
 }
 .button[data-variant=primary][data-attachments*=big-pad] {
   padding: 1rem 1.2rem;
@@ -2832,18 +2832,18 @@ ul:where(.flex, .grid) {
   outline-color: hsl(0, 0%, 76%);
   cursor: pointer;
 }
-.button[data-variant=secondary]:is(:focus-visible, :hover) {
+.button[data-variant=secondary]:is(:focus-visible, :hover, [data-attachments*=full]) {
   background-color: hsl(0, 0%, 76%);
   color: hsl(0, 0%, 12%);
 }
-.button[data-variant=secondary]:is(:focus-visible, :hover) * {
+.button[data-variant=secondary]:is(:focus-visible, :hover, [data-attachments*=full]) * {
   color: inherit;
 }
 .button[data-variant=secondary][data-attachments*=tiny-pad] {
   padding: 0.1rem 0.6rem;
 }
 .button[data-variant=secondary][data-attachments*=small-pad] {
-  padding: 0.25rem 0.8rem;
+  padding: 0.45rem 0.8rem;
 }
 .button[data-variant=secondary][data-attachments*=big-pad] {
   padding: 1rem 1.2rem;
@@ -2868,18 +2868,18 @@ ul:where(.flex, .grid) {
   outline-color: hsl(0, 59%, 59%);
   cursor: pointer;
 }
-.button[data-variant=error]:is(:focus-visible, :hover) {
+.button[data-variant=error]:is(:focus-visible, :hover, [data-attachments*=full]) {
   background-color: hsl(0, 59%, 59%);
   color: hsl(0, 0%, 12%);
 }
-.button[data-variant=error]:is(:focus-visible, :hover) * {
+.button[data-variant=error]:is(:focus-visible, :hover, [data-attachments*=full]) * {
   color: inherit;
 }
 .button[data-variant=error][data-attachments*=tiny-pad] {
   padding: 0.1rem 0.6rem;
 }
 .button[data-variant=error][data-attachments*=small-pad] {
-  padding: 0.25rem 0.8rem;
+  padding: 0.45rem 0.8rem;
 }
 .button[data-variant=error][data-attachments*=big-pad] {
   padding: 1rem 1.2rem;
