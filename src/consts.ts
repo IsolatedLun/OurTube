@@ -13,6 +13,10 @@ export const VIDEO_URL = (id: string) => "/videos/" + id;
 // Options
 export const MAX_VIDEO_TITLE_LINES = 2;
 
+export const VIDEOS_PER_PAGE = 16; 
+export const COMMENTS_PER_PAGE = 24; 
+export const REPLIES_PER_PAGE = 16; 
+
 // Misc
 export const DATE_CONDITIONS: T_DateCondition[] = [
     {

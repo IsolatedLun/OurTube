@@ -2,6 +2,7 @@
 
 .profile {
     aspect-ratio: 1;
+    height: auto;
     border-radius: $profile-border-radius;
 
     &[data-variant='comment'] {

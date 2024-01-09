@@ -8,7 +8,6 @@ import Profile from "../Profile/Profile";
 import { dateToHumanReadableDateSpan } from "@/utils/utils";
 
 export default function VideoPreview({ props } : { props: T_VideoPreview }) {
-    console.log(props)
     return (
         <Flex cls={css("video-preview")} props={{ column: true, align: 'start' }}>
             <Link href={VIDEO_URL(props.id)}>

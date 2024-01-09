@@ -5,7 +5,7 @@ import { T_FetchFn, T_PaginatedItem } from "./types";
 export default function Paginator(
     { fetchFn, Component, SkeletonComponent }
     :
-    { fetchFn: T_FetchFn, Component: FC<{ props: T_PaginatedItem }>, SkeletonComponent: FC }
+    { fetchFn: T_FetchFn, Component: FC<any>, SkeletonComponent: FC }
 ) {
     const [items, setItems] = useState<T_PaginatedItem[]>([]);
     const [page, setPage] = useState(0);
@@ -16,12 +16,12 @@ export default function Paginator(
         setItems(prev => [...prev, ...result.items]);
 
         if(result.totalPages >= page) {
-            setIsDone(true);
+            setIsDone(false);
         }
     }
 
     useEffect(() => {
-        if(isDone) 
+        if(!isDone) 
             fetch();
     }, [page]);
 
@@ -33,7 +33,11 @@ export default function Paginator(
                 isDone
                 ? null
                 : (
-                    [0, 0, 0, 0].map(() => <SkeletonComponent />)
+                    [0, 0, 0, 0].map(() => (
+                        <div aria-hidden={true}>
+                            <SkeletonComponent />
+                        </div>
+                    ))
                 ) 
             }
         </>

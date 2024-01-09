@@ -2939,6 +2939,7 @@ ul:where(.flex, .grid) {
 
 .profile {
   aspect-ratio: 1;
+  height: auto;
   border-radius: 100vmax;
 }
 .profile[data-variant=comment] {
@@ -2993,6 +2994,29 @@ ul:where(.flex, .grid) {
 }
 .video-tab__description article {
   line-height: 1.4;
+}
+
+.skeleton {
+  position: relative;
+}
+.skeleton > * {
+  visibility: hidden;
+}
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: hsl(0, 0%, 20%);
+  z-index: 999999;
+}
+.skeleton.skeleton-bevel::after {
+  border-radius: 0.75rem;
+}
+.skeleton.skeleton-capsule::after {
+  border-radius: 100vmax;
+}
+.skeleton.skeleton-profile::after {
+  border-radius: 100vmax;
 }
 
 .line {

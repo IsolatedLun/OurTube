@@ -6,22 +6,24 @@ import { css } from "@/utils/css/css";
 import { useEffect, useState } from "react";
 import { T_VideoPreview } from "@/components/Modules/VideoPreview/types";
 import { pb } from "@/utils/backend";
+import { T_FetchFn } from "@/components/Modules/Paginator/types";
+import Paginator from "@/components/Modules/Paginator/Paginator";
+import VideoPreviewSkeleton from "@/components/Modules/Skeleton/VideoPreviewSkeleton";
 
 export default function Home() {
     const [videos, setVideos] = useState<T_VideoPreview[]>([]);
 
-    useEffect(() => {
-        pb.collection<T_VideoPreview>('videos').getList(1, 16, { expand: "channel" })
-            .then(d => setVideos(d.items))
-    }, [])
+    function paginateVideos(): T_FetchFn {
+        return (page: number) => (
+            pb.collection<T_VideoPreview>('videos').getList(page, 16, { expand: "channel" })
+        )
+    }
 
     return(
         <>
             <HomeAside />
-            <div className={css("video-previews-grid", "grid").class}>
-                {
-                    videos.map(video => <VideoPreview props={video} />)
-                }
+            <div className={css("video-previews-grid", "grid gap-2").class}>
+                <Paginator fetchFn={paginateVideos()} Component={VideoPreview} SkeletonComponent={VideoPreviewSkeleton} />
             </div>
         </>
     )
