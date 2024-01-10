@@ -6,7 +6,7 @@ import LoginForm from "@/components/Layout/Auth/Login/LoginForm";
 import { AUTH_SIGNUP_URL } from "@/consts";
 import Link from "next/link";
 
-export default function Login() {
+export default function LoginPage() {
     return (
     <>
         <h2 className={css(null, "text-align-center").class}>Login</h2>

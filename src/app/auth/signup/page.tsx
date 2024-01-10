@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 import { AUTH_LOGIN_URL } from "@/consts";
 import Link from "next/link";
 
-export default function SignUp() {
+export default function SignUpPage() {
     const router = useRouter();
     async function signUpWithOAuth(provider: string) {
         const authData = await pb.collection('users').authWithOAuth2({ provider });

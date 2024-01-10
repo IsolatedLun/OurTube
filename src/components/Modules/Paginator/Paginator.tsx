@@ -1,11 +1,13 @@
 import React, { useEffect, useState, FC } from "react";
 import { T_FetchFn, T_PaginatedItem } from "./types";
+import { T_ReactSetStateHook } from "@/hooks/types";
 
 
 export default function Paginator(
-    { fetchFn, Component, SkeletonComponent }
+    { fetchFn, skeletonCount = 8, countHook, Component, SkeletonComponent }
     :
-    { fetchFn: T_FetchFn, Component: FC<any>, SkeletonComponent: FC }
+    { fetchFn: T_FetchFn, skeletonCount?: number, countHook?: T_ReactSetStateHook<number>
+        Component: FC<any>, SkeletonComponent: FC }
 ) {
     const [items, setItems] = useState<T_PaginatedItem[]>([]);
     const [page, setPage] = useState(0);
@@ -18,6 +20,9 @@ export default function Paginator(
         if(result.totalPages >= page) {
             setIsDone(false);
         }
+
+        if(page === 0 && countHook)
+            countHook(result.totalItems);
     }
 
     useEffect(() => {
@@ -33,8 +38,8 @@ export default function Paginator(
                 isDone
                 ? null
                 : (
-                    [0, 0, 0, 0].map(() => (
-                        <div aria-hidden={true}>
+                    new Array(skeletonCount).fill(0).map(() => (
+                        <div className="width-100" aria-hidden={true}>
                             <SkeletonComponent />
                         </div>
                     ))

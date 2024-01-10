@@ -14,10 +14,14 @@ import { T_VideoPreview } from "@/components/Modules/VideoPreview/types";
 import VideoTabComments from "./VideoTabComments";
 import VideoTabDescription from "./VideoTabDescription";
 import Link from "next/link";
+import { T_FetchFn } from "@/components/Modules/Paginator/types";
+import Paginator from "@/components/Modules/Paginator/Paginator";
+import VideoPreviewSkeleton from "@/components/Modules/Skeleton/VideoPreviewSkeleton";
+import { useRouter } from "next/navigation";
 
 export default function VideoTab({ id } : { id: string }) {
     const [video, setVideo] = useState<Some<T_VideoTab>>(null);
-    const [videos, setVideos] = useState<T_VideoPreview[]>([]);
+    const router = useRouter();
 
     useEffect(() => {
         pb.collection<T_VideoTab>('videos')
@@ -25,11 +29,21 @@ export default function VideoTab({ id } : { id: string }) {
             .then(d => {
                 setVideo(d);
                 pb.collection('videos').update(id, { views: d.views + 1 });
-            });
-
-        pb.collection<T_VideoPreview>('videos').getList(1, 16, { expand: "channel" })
-            .then(d => setVideos(d.items.filter(x => x.id !== id)));
+            })
+            
+            // Autocancellation breaks this, so enable in production
+            // .catch(() => router.push('/error'));
     }, [])
+
+    function paginateOtherVideos(): T_FetchFn {
+        return (page: number) => (
+            pb.collection<T_VideoPreview>('videos')
+                .getList(1, 16, { 
+                    expand: "channel" ,
+                    filter: `id != "${video!.id}"`
+            })
+        )
+    }
 
     return (
         <div className={css("video-tab", "grid gap-3").class}>
@@ -71,9 +85,15 @@ export default function VideoTab({ id } : { id: string }) {
                 : null
             }
             <section className={css("video-tab__others").class}>
-                <div className={css("video-previews-grid", "grid").class}>
+                <div className={css("video-previews-grid", "grid gap-2").class}>
                     {
-                        videos.map(video => <VideoPreview props={video} />)
+                        video && (
+                            <Paginator 
+                                fetchFn={paginateOtherVideos()} 
+                                Component={VideoPreview} 
+                                SkeletonComponent={VideoPreviewSkeleton}
+                            />
+                        )
                     }
                 </div>
             </section>

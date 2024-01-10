@@ -3007,7 +3007,7 @@ ul:where(.flex, .grid) {
   position: absolute;
   inset: 0;
   background-color: hsl(0, 0%, 20%);
-  z-index: 999999;
+  z-index: 9999;
 }
 .skeleton.skeleton-bevel::after {
   border-radius: 0.75rem;
@@ -3017,6 +3017,14 @@ ul:where(.flex, .grid) {
 }
 .skeleton.skeleton-profile::after {
   border-radius: 100vmax;
+}
+
+.error-page {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .line {

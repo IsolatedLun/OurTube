@@ -1,0 +1,6 @@
+@use '../abstracts/' as *;
+
+.error-page {
+    @include pseudoElement();
+    @include transformCenter();
+}

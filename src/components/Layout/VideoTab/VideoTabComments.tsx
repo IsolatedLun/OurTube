@@ -6,21 +6,20 @@ import Button from "@/components/Interactibles/Button/Button";
 import { pb } from "@/utils/backend";
 import { useEffect, useState } from "react";
 import VideoComment from "@/components/Modules/VideoComment/VideoComment";
+import { T_FetchFn } from "@/components/Modules/Paginator/types";
+import Paginator from "@/components/Modules/Paginator/Paginator";
+import VideoCommentSkeleton from "@/components/Modules/Skeleton/VideoCommentSkeleton";
 
-export default function VideoTabComments({ video } : { video: T_VideoTab }) {
-    const [comments, setComments] = useState<T_VideoComment[]>([]);
-    async function fetchComments() {
-        const data = await pb.collection<T_VideoComment>('comments')
-            .getList(1, 16, { 
+export default function VideoTabComments({ video } : { video: T_VideoTab }) {    
+    const [commentCount, setCommentCount] = useState(0);
+
+    function paginateComments(): T_FetchFn {
+        return (page: number) => pb.collection<T_VideoComment>('comments')
+            .getList(page, 16, { 
                 expand: 'channel',
                 filter: `video="${video.id}"`
             });
-        setComments(data.items);
     }
-
-    useEffect(() => {
-        fetchComments();
-    }, [])
 
 
     return (
@@ -43,10 +42,18 @@ export default function VideoTabComments({ video } : { video: T_VideoTab }) {
             </Flex>
             <section className="width-100">
                 <h2 className="margin-block-end-2">
-                    {comments.length} {comments.length === 1 ? 'comment' : 'comments'}
+                    {commentCount} {commentCount === 1 ? 'comment' : 'comments'}
                 </h2>
-                <Flex cls={css("video-tab__comments")} props={{ grow: true }}>
-                    {comments.map(comment => <VideoComment props={comment} />)}
+                <Flex 
+                    cls={css("video-tab__comments")} 
+                    props={{ grow: true, column: true, align: 'start', gap: 4 }}
+                >
+                    <Paginator 
+                        fetchFn={paginateComments()}
+                        countHook={setCommentCount}
+                        Component={VideoComment}
+                        SkeletonComponent={VideoCommentSkeleton} 
+                    />
                 </Flex>
             </section>
         </Flex>
