@@ -4,10 +4,10 @@ import { T_ReactSetStateHook } from "@/hooks/types";
 
 
 export default function Paginator(
-    { fetchFn, skeletonCount = 8, countHook, Component, SkeletonComponent }
+    { fetchFn, skeletonCount = 8, externalItems = [], countHook, Component, SkeletonComponent }
     :
-    { fetchFn: T_FetchFn, skeletonCount?: number, countHook?: T_ReactSetStateHook<number>
-        Component: FC<any>, SkeletonComponent: FC }
+    { fetchFn: T_FetchFn, skeletonCount?: number, externalItems?: any[],
+        countHook?: T_ReactSetStateHook<number>, Component: FC<any>, SkeletonComponent: FC }
 ) {
     const [items, setItems] = useState<T_PaginatedItem[]>([]);
     const [page, setPage] = useState(0);
@@ -18,7 +18,7 @@ export default function Paginator(
         setItems(prev => [...prev, ...result.items]);
 
         if(result.totalPages >= page) {
-            setIsDone(false);
+            setIsDone(true);
         }
 
         if(page === 0 && countHook)
@@ -29,6 +29,10 @@ export default function Paginator(
         if(!isDone) 
             fetch();
     }, [page]);
+
+    useEffect(() => {
+        setItems(prev => [...externalItems, ...prev]);
+    }, [externalItems])
 
     return(
         <>

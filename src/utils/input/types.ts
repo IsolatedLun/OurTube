@@ -14,6 +14,7 @@ export interface T_Input {
     label: string;
     placeholder: string;
     name: string;
+    value: string;
     
     validators: T_InputValidator[];
     attachments?: T_InputAttachments[];
@@ -23,3 +24,4 @@ export interface T_Input {
 
 export type T_FileInput = T_Input;
 export type T_TextInput = T_Input & {inputType: "text" | "password"};
+export type T_TextAreaInput = T_Input;

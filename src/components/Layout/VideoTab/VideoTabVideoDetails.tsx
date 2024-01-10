@@ -26,7 +26,7 @@ export default function VideoTabVideoDetails({ video } : { video: T_VideoTab }) 
 
             <Flex props={{ align: 'center', justify: 'end', gap: 2 }}>
                 <p className={css(null, "clr-misc-text-muted fw-bold whitespace-nowrap").class}>
-                    <span className="clr-primary-400">{(ratio * 100).toFixed(2)}%</span> liked this
+                    <span className="clr-primary-400"><Numeric n={ratio * 100} />%</span> liked this
                 </p>
                 <div 
                     className={css("video-tab__ratio-bar", "position-relative overflow-hidden").class} 

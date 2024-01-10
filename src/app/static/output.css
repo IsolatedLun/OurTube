@@ -2903,6 +2903,13 @@ ul:where(.flex, .grid) {
   background-color: hsl(0, 0%, 16%);
   outline-color: hsl(0, 0%, 51%);
 }
+.input-container[data-variant=primary] :is(textarea.input-container__input) {
+  width: 100%;
+  min-height: 4ch;
+  height: 4ch;
+  resize: vertical;
+  border-radius: 0.75rem;
+}
 
 .primary-navigation {
   padding: 0.8rem 2rem;

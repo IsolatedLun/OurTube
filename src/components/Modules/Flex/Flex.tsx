@@ -7,9 +7,9 @@ import { css } from "@/utils/css/css";
 
 
 export default function Flex(
-    { children, tag = 'div', cls, props = defaultFlexProps } 
+    { children, tag = 'div', cls, id = crypto.randomUUID(), props = defaultFlexProps } 
     : 
-    { children: ReactNode, tag?: string, cls?: T_CSS, props?: T_Flex }
+    { children: ReactNode, tag?: string, cls?: T_CSS, id?: string, props?: T_Flex }
 ) 
 {
     const Tag = tag as keyof JSX.IntrinsicElements;
@@ -24,7 +24,11 @@ export default function Flex(
         ].join(" ")
     )
     return(
-        <Tag className={_cls.extend(cls).class} data-grow={props.grow ?? defaultFlexProps.grow}>
+        <Tag 
+            id={id}
+            className={_cls.extend(cls).class} 
+            data-grow={props.grow ?? defaultFlexProps.grow}
+        >
             {children}
         </Tag>
     )

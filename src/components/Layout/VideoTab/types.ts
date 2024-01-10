@@ -10,11 +10,14 @@ export interface T_VideoTab extends T_VideoPreview {
     dislikes: number;
 }
 
-export interface T_VideoComment extends T_CollectionItem {
+export interface T_VideoCommentOrReply extends T_CollectionItem {
     text: string;
     
     video: string;
-    
+    channel: string;
+    comment_to: string;
+    reply_to: string;
+
     likes: number;
     dislikes: number;
 
@@ -22,5 +25,8 @@ export interface T_VideoComment extends T_CollectionItem {
 
     expand: {
         channel: T_Channel;
+        reply_to: T_VideoCommentOrReply;
     }
 }
+
+export type T_VideoCommentOrReplyForm = Omit<T_VideoCommentOrReply, keyof T_CollectionItem | "expand">;
