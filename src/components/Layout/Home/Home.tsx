@@ -23,7 +23,11 @@ export default function Home() {
         <>
             <HomeAside />
             <div className={css("video-previews-grid", "grid gap-2").class}>
-                <Paginator fetchFn={paginateVideos()} Component={VideoPreview} SkeletonComponent={VideoPreviewSkeleton} />
+                <Paginator 
+                    fetchFn={paginateVideos()} 
+                    Component={VideoPreview} 
+                    SkeletonComponent={VideoPreviewSkeleton} 
+                />
             </div>
         </>
     )

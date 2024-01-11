@@ -46,4 +46,8 @@
     &__description article {
         line-height: 1.4;
     }
+
+    &__comment-or-reply:is(:target) {
+        border: 2px solid red;
+    }
 }

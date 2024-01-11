@@ -1,42 +1,37 @@
-import Flex from "../Flex/Flex";
+import Flex from "../../Flex/Flex";
 import Button from "@/components/Interactibles/Button/Button";
 import { css } from "@/utils/css/css";
-import Numeric from "../Numeric/Numeric";
+import Numeric from "../../Numeric/Numeric";
 import { T_ReactSetStateHook } from "@/hooks/types";
 import { useEffect } from "react";
-import { T_VideoComment } from "./types";
-import { T_DeleteFn } from "../Paginator/types";
-import { deleteComment } from "@/utils/backend/video";
+import { T_VideoCommentReply } from "../types";
+import { T_DeleteFn } from "../../Paginator/types";
+import { deleteReply } from "@/utils/backend/video";
 
 
-export function VideoCommentControls(
-    { props, showReplies, addReplyToggleHook, replyToggleHook, onDelete } 
+export function VideoCommentReplyControls(
+    { props, addReplyToggleHook, onDelete } 
     : 
-    { props: T_VideoComment, showReplies: boolean, addReplyToggleHook: T_ReactSetStateHook<boolean>
-        replyToggleHook: T_ReactSetStateHook<boolean>, onDelete: T_DeleteFn }
+    { props: T_VideoCommentReply, onDelete: T_DeleteFn,
+        addReplyToggleHook: T_ReactSetStateHook<boolean> }
 ) {
-    
-    async function _deleteComment() {
-        await deleteComment(props);
+
+    async function _deleteReply() {
+        await deleteReply(props);
         onDelete(props);
     }
-    
+
     return(
         <Flex props={{ grow: true, justify: 'space-between' }}>
             <Flex>
-                {
-                    props.reply_count > -1 
-                    ? (
-                        <Button button={{
-                            variant: 'secondary',
-                            attachments: ['small-pad', showReplies ? 'full' : ''],
-                            cls: css(null, 'fs-350 margin-inline-end-2'),
-                            onClick: () => replyToggleHook(prev => !prev)
-                        }}>
-                            {showReplies ? 'Close replies' : 'View replies'} {props.reply_count}
-                        </Button>
-                    ) : null
-                }
+                <Button button={{
+                    variant: 'primary',
+                    attachments: ['small-pad', 'full'],
+                    cls: css(null, 'fs-350 margin-inline-end-2'),
+                    to: '#' + props.reply_to_id
+                }}>
+                    @{props.reply_to_name}
+                </Button>
                 <Button button={{
                     variant: 'secondary',
                     attachments: ['small-pad'],
@@ -56,7 +51,7 @@ export function VideoCommentControls(
                     variant: 'error',
                     attachments: ['small-pad'],
                     cls: css(null, 'fs-350'),
-                    onClick: _deleteComment,
+                    onClick: _deleteReply
                 }}>
                     Delete
                 </Button>

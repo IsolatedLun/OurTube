@@ -3,35 +3,28 @@ import TextArea from "@/components/Interactibles/Inputs/TextArea";
 import Flex from "@/components/Modules/Flex/Flex";
 import { pb } from "@/utils/backend";
 import { useState } from "react";
-import { T_VideoCommentOrReply, T_VideoCommentOrReplyForm, T_VideoTab } from "../VideoTab/types";
+import { T_VideoTab } from "../VideoTab/types";
 import { T_ReactSetStateHook } from "@/hooks/types";
-import { T_CollectionItem } from "@/utils/types";
+import { T_VideoComment } from "@/components/Modules/VideoComment/types";
+import { T_AddCommentData } from "./types";
+import { createComment } from "@/utils/backend/video";
 
 export function AddComment(
-    { data, addCommentHook } : 
-    { data: T_VideoTab, addCommentHook?: T_ReactSetStateHook<T_VideoCommentOrReply[]> }
+    { video, appendCommentFn } : 
+    { video: T_VideoTab, appendCommentFn?: T_ReactSetStateHook<T_VideoComment[]> }
 ) {
     const [text, setText] = useState("");
 
-    function addComment() {
-        const data: T_VideoCommentOrReplyForm = {
-            video: "5j0llbd9nunlb6j",
-            text: text,
-            likes: 0,
-            dislikes: 0,
-            pinned: false,
-            channel: "3neyn9immslajdm",
-            reply_to: "",
-            comment_to: ""
-        }
+    async function _addComment() {
+        const data: T_AddCommentData = {
+            video: video.id,
+            channel: '3neyn9immslajdm',
+            text
+        };
 
-        pb.collection<T_VideoCommentOrReply>('comments')
-        .create(data, { expand: 'channel' })
-        .then((newComment) => {
-            setText('');
-            if(addCommentHook)
-                addCommentHook(prev => [newComment, ...prev]);
-        })
+        const newComment = await createComment(data);
+        setText('');
+        appendCommentFn!(prev => [newComment, ...prev]);
     }
 
     return(
@@ -47,7 +40,7 @@ export function AddComment(
                 }} />
             <Button button={{
                 variant: 'primary',
-                onClick: () => addComment()
+                onClick: () => _addComment()
             }}>
                 Comment
             </Button>

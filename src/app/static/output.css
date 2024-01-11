@@ -3002,6 +3002,9 @@ ul:where(.flex, .grid) {
 .video-tab__description article {
   line-height: 1.4;
 }
+.video-tab__comment-or-reply:is(:target) {
+  border: 2px solid red;
+}
 
 .skeleton {
   position: relative;
