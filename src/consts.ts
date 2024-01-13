@@ -12,6 +12,7 @@ export const VIDEO_URL = (id: string) => "/videos/" + id;
 
 // Options
 export const MAX_VIDEO_TITLE_LINES = 2;
+export const DEFAULT_SKELETON_COUNT = 8;
 
 export const VIDEOS_PER_PAGE = 16; 
 export const COMMENTS_PER_PAGE = 24; 

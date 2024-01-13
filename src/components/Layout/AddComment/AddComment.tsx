@@ -1,22 +1,20 @@
 import Button from "@/components/Interactibles/Button/Button";
 import TextArea from "@/components/Interactibles/Inputs/TextArea";
 import Flex from "@/components/Modules/Flex/Flex";
-import { pb } from "@/utils/backend";
 import { useState } from "react";
 import { T_VideoTab } from "../VideoTab/types";
-import { T_ReactSetStateHook } from "@/hooks/types";
-import { T_VideoComment } from "@/components/Modules/VideoComment/types";
-import { T_AddCommentData } from "./types";
-import { createComment } from "@/utils/backend/video";
+import { T_CreateCommentData } from "./types";
+import { createComment } from "@/utils/backend/comment";
+import { T_Comment } from "@/components/Modules/Comment/types";
 
 export function AddComment(
-    { video, appendCommentFn } : 
-    { video: T_VideoTab, appendCommentFn?: T_ReactSetStateHook<T_VideoComment[]> }
+    { video, onNewComment } : 
+    { video: T_VideoTab, onNewComment: (comment: T_Comment) => void }
 ) {
     const [text, setText] = useState("");
 
-    async function _addComment() {
-        const data: T_AddCommentData = {
+    async function addComment() {
+        const data: T_CreateCommentData = {
             video: video.id,
             channel: '3neyn9immslajdm',
             text
@@ -24,7 +22,7 @@ export function AddComment(
 
         const newComment = await createComment(data);
         setText('');
-        appendCommentFn!(prev => [newComment, ...prev]);
+        onNewComment(newComment);
     }
 
     return(
@@ -40,7 +38,7 @@ export function AddComment(
                 }} />
             <Button button={{
                 variant: 'primary',
-                onClick: () => _addComment()
+                onClick: () => addComment()
             }}>
                 Comment
             </Button>

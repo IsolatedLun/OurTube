@@ -1,12 +1,12 @@
-import Flex from "../Flex/Flex";
+import Flex from "../../Flex/Flex";
 import { BACKEND_FILE_URL, CHANNEL_URL } from "@/consts";
 import Link from "next/link";
-import Profile from "../Profile/Profile";
+import Profile from "../../Profile/Profile";
 import { css } from "@/utils/css/css";
+import { T_Comment, T_CommentReply } from "../types";
 import { dateToHumanReadableDateSpan } from "@/utils/utils";
-import { T_VideoComment } from "./types";
 
-export function VideoCommentDetails({ props } : { props: T_VideoComment }) {
+export function CommentDetails({ props } : { props: T_Comment | T_CommentReply }) {
     return(
         <Flex props={{ grow: true, align: 'start' }}>
             <Link href={CHANNEL_URL(props.expand.channel.id)}>
@@ -25,7 +25,7 @@ export function VideoCommentDetails({ props } : { props: T_VideoComment }) {
                     <p>{props.expand.channel.name}</p>
                     <p className="fs-350">{dateToHumanReadableDateSpan(props.created)}</p>
                 </Flex>
-                <p>{props.text}</p>
+                <p className="whitespace-pre-line">{props.text}</p>
             </Flex>
         </Flex>
     )

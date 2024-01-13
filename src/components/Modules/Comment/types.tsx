@@ -1,7 +1,7 @@
 import { T_Channel } from "@/components/Layout/Channel/types";
 import { T_CollectionItem } from "@/utils/types";
 
-export interface T_VideoComment extends T_CollectionItem {
+export interface T_Comment extends T_CollectionItem {
     text: string;
     
     video: string;
@@ -18,10 +18,8 @@ export interface T_VideoComment extends T_CollectionItem {
     }
 }
 
-export interface T_VideoCommentReply extends T_VideoComment {
+export interface T_CommentReply extends T_Comment {
     parent: string;
     reply_to_name: string;
     reply_to_id: string;
 }
-
-export type T_VideoCommentOrReplyForm = Omit<T_VideoCommentReply, keyof T_CollectionItem | "expand">;

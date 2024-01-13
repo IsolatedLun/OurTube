@@ -3,6 +3,8 @@ import { T_VideoTab } from "./types";
 import { css } from "@/utils/css/css";
 import Button from "@/components/Interactibles/Button/Button";
 import Numeric from "@/components/Modules/Numeric/Numeric";
+import Icon from "@/components/Modules/Icon";
+import { ICON_DOWNLOAD, ICON_REPORT, ICON_SHARE } from "@/icons";
 
 export default function VideoTabControls({ video } : { video: T_VideoTab }) {
     return (
@@ -33,17 +35,17 @@ export default function VideoTabControls({ video } : { video: T_VideoTab }) {
                 <Button button={{
                     variant: 'secondary'
                 }}>
-                    Share
+                    <Icon>{ICON_SHARE}</Icon>
                 </Button>
                 <Button button={{
                     variant: 'secondary'
                 }}>
-                    Download
+                    <Icon>{ICON_DOWNLOAD}</Icon>
                 </Button>
                 <Button button={{
                     variant: 'secondary'
                 }}>
-                    Report
+                    <Icon>{ICON_REPORT}</Icon>
                 </Button>
             </Flex>
         </Flex>

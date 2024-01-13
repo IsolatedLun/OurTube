@@ -31,6 +31,9 @@ export const ICON_SIGN_OUT = '\uf08b';
 export const ICON_SIGN_IN = '\uf090';
 export const ICON_EDIT ='\uf044';
 export const ICON_LOOP = '\uf01e';
+export const ICON_SHARE = '\uf064';
+export const ICON_DOWNLOAD = '\uf0a0'
+export const ICON_REPORT = '\uf425';
 
 export const ICON_GRID_V = '\uf58e';
 export const ICON_GRID_H = '\uf58d';

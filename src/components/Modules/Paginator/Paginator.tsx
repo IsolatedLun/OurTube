@@ -1,56 +1,54 @@
-import React, { useEffect, useState, FC } from "react";
-import { T_FetchFn, T_PaginatedItem } from "./types";
-import { T_ReactSetStateHook } from "@/hooks/types";
-import { Some, T_CollectionItem } from "@/utils/types";
+import React, { useEffect, useState, useRef } from "react";
+import { T_Paginator } from "./types";
+import { DEFAULT_SKELETON_COUNT } from "@/consts";
 
-
-export default function Paginator(
-    { fetchFn, skeletonCount = 8, externalItems = null, countHook, Component, SkeletonComponent }
-    :
-    { fetchFn: T_FetchFn, skeletonCount?: number, externalItems?: Some<any[]>,
-        countHook?: T_ReactSetStateHook<number>, Component: FC<any>, SkeletonComponent: FC }
-) {
-    const [items, setItems] = useState<T_CollectionItem[]>([]);
+export default function Paginator({ props } : { props: T_Paginator }) {
     const [page, setPage] = useState(0);
     const [isDone, setIsDone] = useState(false);
+    const [hasIntersected, setHasIntersected] = useState(false);
+
+    const intersectionBox = useRef(null);
 
     async function fetch() {
-        const result = await fetchFn(page);
-        setItems(prev => [...prev, ...result.items]);
+        const result = await props.fetchFn(page);
+        props.onFetchItems(result.items);
 
-        if(result.totalPages >= page) {
+        if(page >= result.totalPages) {
             setIsDone(true);
         }
-
-        if(page === 0 && countHook)
-            countHook(result.totalItems);
     }
 
-    function removeItem(props: T_CollectionItem) {
-        setItems(prev => prev.filter(x => x.id !== props.id))
-    }
 
     useEffect(() => {
-        if(!isDone) 
+        if(!isDone && page > 0) 
             fetch();
+
+        let options = { rootMargin: "0px", threshold: 1.0};
+        const observer = new IntersectionObserver(
+            (entries) => {
+                if(!hasIntersected) {
+                    entries.forEach(entry => entry.isIntersecting ? setPage(page + 1) : null);
+                    setHasIntersected(true);
+                }
+            }, options)
+
+        observer.observe(intersectionBox.current!);
     }, [page]);
 
     useEffect(() => {
-        if(externalItems)
-            setItems([...externalItems, ...items]);
-    }, [externalItems])
+        setHasIntersected(false)
+    }, [page])
 
     return(
         <>
-            { items.map(item => <Component props={item} onDelete={removeItem} />) }
-
+            <div ref={intersectionBox} aria-hidden='true' className="intersection-observer" />
             { 
                 isDone
                 ? null
                 : (
-                    new Array(skeletonCount).fill(0).map(() => (
+                    new Array(props?.skeletonCount ?? DEFAULT_SKELETON_COUNT).fill(0).map(() => (
                         <div className="width-100" aria-hidden={true}>
-                            <SkeletonComponent />
+                            <props.SkeletonComponent />
                         </div>
                     ))
                 ) 
