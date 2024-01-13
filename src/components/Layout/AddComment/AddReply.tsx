@@ -1,37 +1,32 @@
 import Button from "@/components/Interactibles/Button/Button";
 import TextArea from "@/components/Interactibles/Inputs/TextArea";
 import Flex from "@/components/Modules/Flex/Flex";
-import { pb } from "@/utils/backend";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { T_ReactSetStateHook } from "@/hooks/types";
 import { T_AddReplyData } from "./types";
-import { T_VideoComment, T_VideoCommentReply } from "@/components/Modules/VideoComment/types";
-import { VideoContext } from "../VideoTab/VideoTabComments";
-import { CommentContext } from "@/components/Modules/VideoComment/VideoComment";
-import { createReply } from "@/utils/backend/video";
+import { createReply } from "@/utils/backend/comment";
+import { T_Comment, T_CommentReply } from "@/components/Modules/Comment/types";
 
 export function AddReply(
-    { props, comment, appendReplyFn } : 
-    { props: T_VideoCommentReply | T_VideoComment, comment: T_VideoComment, 
-        appendReplyFn: T_ReactSetStateHook<T_VideoCommentReply[]> }
+    { props, parentComment, onNewReply } : 
+    { props: T_Comment | T_CommentReply, parentComment: T_Comment, 
+        onNewReply: (newReply: T_CommentReply) => void }
 ) {
-    const video = useContext(VideoContext);
-    const parentComment = useContext(CommentContext);
     const [text, setText] = useState("");
 
-    async function _createReply() {
+    async function addReply() {
         const data: T_AddReplyData = {
             text,
-            video: video!.id,
+            video: parentComment.video,
             channel: '3neyn9immslajdm',
-            reply_to_id: comment.id,
-            reply_to_name: comment.expand.channel.name,
-            parent: parentComment?.props.id ?? comment.id
+            reply_to_id: props.id,
+            reply_to_name: props.expand.channel.name,
+            parent: parentComment.id
         };
 
         const newReply = await createReply(data);
         setText('');
-        appendReplyFn!(prev => [newReply, ...prev]);
+        onNewReply(newReply);
     }
 
     return(
@@ -47,7 +42,7 @@ export function AddReply(
                 }} />
             <Button button={{
                 variant: 'primary',
-                onClick: () => _createReply()
+                onClick: () => addReply()
             }}>
                 Reply
             </Button>

@@ -17,14 +17,17 @@ import Link from "next/link";
 import { T_FetchFn } from "@/components/Modules/Paginator/types";
 import Paginator from "@/components/Modules/Paginator/Paginator";
 import VideoPreviewSkeleton from "@/components/Modules/Skeleton/VideoPreviewSkeleton";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { fetchVideo } from "@/utils/backend/video";
 
 export default function VideoTab({ id } : { id: string }) {
     const [video, setVideo] = useState<Some<T_VideoTab>>(null);
+    const router = useRouter();
 
     useEffect(() => {
-        fetchVideo(id).then(data => setVideo(data))
+        fetchVideo(id)
+            .then(data => setVideo(data))
+            // .catch(() => router.push('/error'))
     }, [])
 
     function paginateOtherVideos(): T_FetchFn {

@@ -19,7 +19,7 @@ export function paginateReplies(comment: T_Comment): T_FetchFn {
     return (page: number) => (
         pb.collection<T_CommentReply>('replies')
             .getList(page, REPLIES_PER_PAGE, {
-                filter: `comment="${comment.id}"`,
+                filter: `parent="${comment.id}"`,
                 expand: 'channel'
             })
     )
@@ -27,4 +27,11 @@ export function paginateReplies(comment: T_Comment): T_FetchFn {
 
 export function createComment(data: T_CreateCommentData) {
     return pb.collection<T_Comment>('comments').create(data, { expand: 'channel' });
+}
+
+export async function createReply(data: T_CreateCommentData) {
+    const result = await pb.collection<T_CommentReply>('replies')
+        .create(data, { expand: 'channel' });
+        
+    return result;
 }

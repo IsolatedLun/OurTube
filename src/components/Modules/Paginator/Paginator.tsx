@@ -3,51 +3,59 @@ import { T_Paginator } from "./types";
 import { DEFAULT_SKELETON_COUNT } from "@/consts";
 
 export default function Paginator({ props } : { props: T_Paginator }) {
-    const [page, setPage] = useState(0);
+    const [page, setPage] = useState(1);
     const [isDone, setIsDone] = useState(false);
-    const [hasIntersected, setHasIntersected] = useState(false);
+    const [isFetching, setIsFetching] = useState(false);
 
     const intersectionBox = useRef(null);
 
     async function fetch() {
+        setIsFetching(true);
         const result = await props.fetchFn(page);
         props.onFetchItems(result.items);
 
-        if(page >= result.totalPages) {
+        if(page + 1 > result.totalPages) {
             setIsDone(true);
         }
+        setIsFetching(false);
     }
 
-
     useEffect(() => {
-        if(!isDone && page > 0) 
-            fetch();
-
         let options = { rootMargin: "0px", threshold: 1.0};
         const observer = new IntersectionObserver(
             (entries) => {
-                if(!hasIntersected) {
-                    entries.forEach(entry => entry.isIntersecting ? setPage(page + 1) : null);
-                    setHasIntersected(true);
+                    for(let i = 0; i < entries.length; i++) {
+                        if(entries[i].isIntersecting && !isFetching) {
+                            setPage(prev => prev + 1)
+                            fetch();
+                        }
                 }
             }, options)
 
-        observer.observe(intersectionBox.current!);
-    }, [page]);
+        if(intersectionBox.current)
+            observer.observe(intersectionBox.current);
 
-    useEffect(() => {
-        setHasIntersected(false)
-    }, [page])
+        return () => observer.disconnect();
+    }, [intersectionBox, isFetching])
 
     return(
         <>
-            <div ref={intersectionBox} aria-hidden='true' className="intersection-observer" />
             { 
                 isDone
                 ? null
                 : (
-                    new Array(props?.skeletonCount ?? DEFAULT_SKELETON_COUNT).fill(0).map(() => (
+                    new Array(props?.skeletonCount ?? DEFAULT_SKELETON_COUNT).fill(0).map((_, i) => (
                         <div className="width-100" aria-hidden={true}>
+                            {
+                                i === 0
+                                ? (
+                                    <div 
+                                        ref={intersectionBox} 
+                                        aria-hidden='true' 
+                                        className="intersection-observer" 
+                                    />
+                                ): null
+                            }
                             <props.SkeletonComponent />
                         </div>
                     ))

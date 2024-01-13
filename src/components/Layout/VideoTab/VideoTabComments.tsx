@@ -1,14 +1,16 @@
 import Flex from "@/components/Modules/Flex/Flex";
 import { T_VideoTab } from "./types";
 import { css } from "@/utils/css/css";
-import { useState } from "react";
+import { createContext, useState } from "react";
 import Paginator from "@/components/Modules/Paginator/Paginator";
 import VideoCommentSkeleton from "@/components/Modules/Skeleton/VideoCommentSkeleton";
 import { AddComment } from "../AddComment/AddComment";
 import { T_Comment } from "@/components/Modules/Comment/types";
 import { paginateComments } from "@/utils/backend/comment";
 import { Comment } from "@/components/Modules/Comment/Comment";
+import { Some } from "@/utils/types";
 
+export const VideoContext = createContext<Some<T_VideoTab>>(null);
 export default function VideoTabComments({ video } : { video: T_VideoTab }) {    
     const [comments, setComments] = useState<T_Comment[]>([]);
 
@@ -30,7 +32,9 @@ export default function VideoTabComments({ video } : { video: T_VideoTab }) {
                     cls={css("video-tab__comments")} 
                     props={{ grow: true, column: true, align: 'start', gap: 4 }}
                 >
-                        {comments.map(comment => <Comment key={comment.id} props={comment} />)}
+                        <VideoContext.Provider value={video}>
+                            { comments.map(comment => <Comment key={comment.id} props={comment} />) }
+                        </VideoContext.Provider>
 
                         <Paginator props={{
                             fetchFn: paginateComments(video),
