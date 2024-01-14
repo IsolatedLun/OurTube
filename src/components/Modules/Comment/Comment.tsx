@@ -13,20 +13,20 @@ import { paginateReplies } from "@/utils/backend/comment";
 import { Reply } from "./Reply";
 import { Some } from "@/utils/types";
 import { AddReply } from "@/components/Layout/AddComment/AddReply";
+import { CommentSectionContext } from "@/components/Layout/VideoTab/VideoTabComments";
+import { E_CommentSectionActions } from "@/hooks/types";
 
 export const CommentContext = createContext<Some<T_Comment>>(null);
 export function Comment({ props } : { props: T_Comment }) {
-    const [replies, setReplies] = useState<T_CommentReply[]>([]);
+    const { state, dispatch } = useContext(CommentSectionContext)!;
     const [showReplies, setShowReplies] = useState(false);
     const [showAddReply, setShowAddReply] = useState(false);
-    
-    useEffect(() => {
-        if(!showReplies)
-            setReplies([]);
-    }, [showReplies])
 
     function appendReply(newReply: T_CommentReply) {
-        setReplies(prev => [newReply, ...prev]);
+        dispatch({
+            type: E_CommentSectionActions.APPEND_REPLIES,
+            payload: { comment: props, replies: [newReply] }
+        });
     }
 
     return(
@@ -70,7 +70,11 @@ export function Comment({ props } : { props: T_Comment }) {
                     <Button button={{
                         variant: 'error',
                         attachments: ['small-pad'],
-                        cls: css(null, 'fs-350')
+                        cls: css(null, 'fs-350'),
+                        onClick: () => dispatch({ 
+                            type: E_CommentSectionActions.DELETE_COMMENT, 
+                            payload: props
+                        })
                     }}>
                         <Icon>{ICON_TRASH}</Icon>
                     </Button>
@@ -110,33 +114,33 @@ export function Comment({ props } : { props: T_Comment }) {
                 ): null
             }
 
-            {
-                showReplies
-                ? (
-                    <Flex 
-                        cls={css("comment__comments", "padding-inline-start-5")} 
-                        props={{ grow: true, column: true, gap: 3 }}
-                    >
-                        <CommentContext.Provider value={props}>
-                            { replies.map(reply => 
-                                    <Reply 
-                                        key={props.id} 
-                                        props={reply} 
-                                        onNewReply={appendReply}
-                                    />
-                                ) 
-                            }
-                        </CommentContext.Provider>
-                        
-                        <Paginator props={{
-                            Component: Reply,
-                            SkeletonComponent: VideoCommentSkeleton,
-                            fetchFn: paginateReplies(props),
-                            onFetchItems: (items) => setReplies(prev => [...prev, ...items]),
-                        }} />
-                    </Flex>
-                ) : null
-            }
+            <div className="width-100" hidden={!showReplies}>
+                <Flex 
+                    cls={css("comment__comments", "padding-inline-start-5")} 
+                    props={{ grow: true, column: true, gap: 3 }}
+                >
+                    <CommentContext.Provider value={props}>
+                        { props.replies.map(reply => 
+                                <Reply 
+                                    key={props.id} 
+                                    props={reply} 
+                                    onNewReply={appendReply}
+                                />
+                            ) 
+                        }
+                    </CommentContext.Provider>
+                    
+                    <Paginator props={{
+                        Component: Reply,
+                        SkeletonComponent: VideoCommentSkeleton,
+                        fetchFn: paginateReplies(props),
+                        onFetchItems: (items) => dispatch({
+                            type: E_CommentSectionActions.APPEND_REPLIES,
+                            payload: { comment: props, replies: items }
+                        }),
+                    }} />
+                </Flex>
+            </div>
         </Flex>
     )
 }

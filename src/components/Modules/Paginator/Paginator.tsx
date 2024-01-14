@@ -21,7 +21,7 @@ export default function Paginator({ props } : { props: T_Paginator }) {
     }
 
     useEffect(() => {
-        let options = { rootMargin: "0px", threshold: 1.0};
+        let options = { rootMargin: "0px", threshold: 1};
         const observer = new IntersectionObserver(
             (entries) => {
                     for(let i = 0; i < entries.length; i++) {

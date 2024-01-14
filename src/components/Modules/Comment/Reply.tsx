@@ -9,15 +9,16 @@ import Icon from "../Icon";
 import { AddReply } from "@/components/Layout/AddComment/AddReply";
 import { useContext, useState } from "react";
 import { CommentContext } from "./Comment";
-import { VideoContext } from "@/components/Layout/VideoTab/VideoTabComments";
+import { CommentSectionContext, VideoContext } from "@/components/Layout/VideoTab/VideoTabComments";
 import { T_VideoTab } from "@/components/Layout/VideoTab/types";
-import { T_ReactSetStateHook } from "@/hooks/types";
+import { E_CommentSectionActions, T_ReactSetStateHook } from "@/hooks/types";
 
 export function Reply(
     { props, onNewReply } 
     : 
     { props: T_CommentReply, onNewReply: (newReply: T_CommentReply) => void }
 ) {
+    const { state, dispatch } = useContext(CommentSectionContext)!;
     const parentComment = useContext(CommentContext) as T_Comment;
     const [showAddReply, setShowAddReply] = useState(false);
 
@@ -57,7 +58,11 @@ export function Reply(
                     <Button button={{
                         variant: 'error',
                         attachments: ['small-pad'],
-                        cls: css(null, 'fs-350')
+                        cls: css(null, 'fs-350'),
+                        onClick: () => dispatch({ 
+                            type: E_CommentSectionActions.DELETE_REPLY,
+                            payload: props 
+                        })
                     }}>
                         <Icon>{ICON_TRASH}</Icon>
                     </Button>
