@@ -9,15 +9,18 @@ import { ICON_REPORT, ICON_TRASH } from "@/icons";
 import Icon from "../Icon";
 import Paginator from "../Paginator/Paginator";
 import VideoCommentSkeleton from "../Skeleton/VideoCommentSkeleton";
-import { paginateReplies } from "@/utils/backend/comment";
+import { deleteComment, paginateReplies } from "@/utils/backend/comment";
 import { Reply } from "./Reply";
 import { Some } from "@/utils/types";
 import { AddReply } from "@/components/Layout/AddComment/AddReply";
 import { CommentSectionContext } from "@/components/Layout/VideoTab/VideoTabComments";
-import { E_CommentSectionActions } from "@/hooks/types";
+import { T_VideoTab } from "@/components/Layout/VideoTab/types";
+import { Voter } from "../Voter/Voter";
+import { E_VoteStatus } from "@/hooks/voter/types";
+import { E_CommentSectionActions } from "@/hooks/commentSection/types";
 
 export const CommentContext = createContext<Some<T_Comment>>(null);
-export function Comment({ props } : { props: T_Comment }) {
+export function Comment({ props, video } : { props: T_Comment, video: T_VideoTab }) {
     const { state, dispatch } = useContext(CommentSectionContext)!;
     const [showReplies, setShowReplies] = useState(false);
     const [showAddReply, setShowAddReply] = useState(false);
@@ -26,6 +29,14 @@ export function Comment({ props } : { props: T_Comment }) {
         dispatch({
             type: E_CommentSectionActions.APPEND_REPLIES,
             payload: { comment: props, replies: [newReply] }
+        });
+    }
+
+    async function remove() {
+        await deleteComment(video, props);
+        dispatch({ 
+            type: E_CommentSectionActions.DELETE_COMMENT, 
+            payload: props
         });
     }
 
@@ -45,20 +56,21 @@ export function Comment({ props } : { props: T_Comment }) {
                             <Button button={{
                                 variant: 'secondary',
                                 attachments: ['small-pad', showReplies ? 'full' : ''],
-                                cls: css(null, 'fs-350 margin-inline-end-2'),
+                                cls: css(null, 'fs-350'),
                                 onClick: () => setShowReplies(!showReplies)
                             }}>
-                                {showReplies ? 'Close replies' : 'View replies'} {props.reply_count}
+                                {showReplies ? 'Close replies' : 'View replies'}
+                                <span className="margin-inline-start-1">{props.reply_count}</span>
                             </Button>
                         ) : null
                     }
                     <Button button={{
                         variant: 'secondary',
-                        attachments: ['small-pad'],
+                        attachments: ['small-pad', showAddReply ? 'full' : ''],
                         cls: css(null, 'fs-350'),
                         onClick: () => setShowAddReply(prev => !prev)
                     }}>
-                        Reply
+                        {showAddReply ? 'Cancel reply' : 'Reply'}
                     </Button>
                     <Button button={{
                         variant: 'secondary',
@@ -71,36 +83,13 @@ export function Comment({ props } : { props: T_Comment }) {
                         variant: 'error',
                         attachments: ['small-pad'],
                         cls: css(null, 'fs-350'),
-                        onClick: () => dispatch({ 
-                            type: E_CommentSectionActions.DELETE_COMMENT, 
-                            payload: props
-                        })
+                        onClick: remove
                     }}>
                         <Icon>{ICON_TRASH}</Icon>
                     </Button>
                 </Flex>
-                <Flex props={{ grow: true, justify: 'end' }}>
-                    <Button button={{
-                        variant: 'primary',
-                        attachments: ['small-pad'],
-                        cls: css(null, 'fs-350')
-                    }}>
-                        <span className="margin-inline-end-1 clr-misc-text-muted">
-                            Like
-                        </span>
-                        <Numeric n={props.likes} />
-                    </Button>
-                    <Button button={{
-                        variant: 'primary',
-                        attachments: ['small-pad'],
-                        cls: css(null, 'fs-350')
-                    }}>
-                        <span className="margin-inline-end-1 clr-misc-text-muted">
-                            Dislike
-                        </span>
-                        <Numeric n={props.dislikes} />
-                    </Button>
-                </Flex>
+                
+                <Voter props={{ ...props, status: E_VoteStatus.NEUTRAL }} />
             </Flex>
 
             {
@@ -120,7 +109,7 @@ export function Comment({ props } : { props: T_Comment }) {
                     props={{ grow: true, column: true, gap: 3 }}
                 >
                     <CommentContext.Provider value={props}>
-                        { props.replies.map(reply => 
+                        { props.replies?.map(reply => 
                                 <Reply 
                                     key={props.id} 
                                     props={reply} 

@@ -9,9 +9,9 @@ import Icon from "../Icon";
 import { AddReply } from "@/components/Layout/AddComment/AddReply";
 import { useContext, useState } from "react";
 import { CommentContext } from "./Comment";
-import { CommentSectionContext, VideoContext } from "@/components/Layout/VideoTab/VideoTabComments";
-import { T_VideoTab } from "@/components/Layout/VideoTab/types";
-import { E_CommentSectionActions, T_ReactSetStateHook } from "@/hooks/types";
+import { CommentSectionContext } from "@/components/Layout/VideoTab/VideoTabComments";
+import { deleteReply } from "@/utils/backend/comment";
+import { E_CommentSectionActions } from "@/hooks/commentSection/types";
 
 export function Reply(
     { props, onNewReply } 
@@ -21,6 +21,14 @@ export function Reply(
     const { state, dispatch } = useContext(CommentSectionContext)!;
     const parentComment = useContext(CommentContext) as T_Comment;
     const [showAddReply, setShowAddReply] = useState(false);
+
+    async function remove() {
+        await deleteReply(parentComment, props);
+        dispatch({ 
+            type: E_CommentSectionActions.DELETE_REPLY,
+            payload: props 
+        });
+    }
 
     return(
         <Flex 
@@ -59,10 +67,7 @@ export function Reply(
                         variant: 'error',
                         attachments: ['small-pad'],
                         cls: css(null, 'fs-350'),
-                        onClick: () => dispatch({ 
-                            type: E_CommentSectionActions.DELETE_REPLY,
-                            payload: props 
-                        })
+                        onClick: remove
                     }}>
                         <Icon>{ICON_TRASH}</Icon>
                     </Button>

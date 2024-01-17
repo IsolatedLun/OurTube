@@ -20,7 +20,7 @@ export function AddComment(
             text
         };
 
-        const newComment = await createComment(data);
+        const newComment = await createComment(video, data);
         setText('');
         onNewComment(newComment);
     }

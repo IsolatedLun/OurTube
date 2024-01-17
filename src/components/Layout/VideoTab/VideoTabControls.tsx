@@ -5,6 +5,8 @@ import Button from "@/components/Interactibles/Button/Button";
 import Numeric from "@/components/Modules/Numeric/Numeric";
 import Icon from "@/components/Modules/Icon";
 import { ICON_DOWNLOAD, ICON_REPORT, ICON_SHARE } from "@/icons";
+import { Voter } from "@/components/Modules/Voter/Voter";
+import { E_VoteStatus } from "@/hooks/voter/types";
 
 export default function VideoTabControls({ video } : { video: T_VideoTab }) {
     return (
@@ -16,22 +18,7 @@ export default function VideoTabControls({ video } : { video: T_VideoTab }) {
             </Button>
 
             <Flex cls={css(null, "width-100")} props={{ justify: 'end' }}>
-                <Button button={{
-                    variant: 'primary'
-                }}>
-                    <span className="margin-inline-end-1 clr-misc-text-muted">
-                        Like
-                    </span>
-                    <Numeric n={video.likes} />
-                </Button>
-                <Button button={{
-                    variant: 'primary'
-                }}>
-                    <span className="margin-inline-end-1 clr-misc-text-muted">
-                        Dislike
-                    </span>
-                    <Numeric n={video.dislikes} />
-                </Button>
+                <Voter props={{ ...video, status: E_VoteStatus.NEUTRAL }} />
                 <Button button={{
                     variant: 'secondary'
                 }}>

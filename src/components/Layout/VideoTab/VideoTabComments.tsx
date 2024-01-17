@@ -1,15 +1,15 @@
 import Flex from "@/components/Modules/Flex/Flex";
 import { T_VideoTab } from "./types";
 import { css } from "@/utils/css/css";
-import { createContext, useEffect, useState } from "react";
+import { createContext} from "react";
 import Paginator from "@/components/Modules/Paginator/Paginator";
 import VideoCommentSkeleton from "@/components/Modules/Skeleton/VideoCommentSkeleton";
 import { AddComment } from "../AddComment/AddComment";
-import { T_Comment, T_CommmentSectionHook } from "@/components/Modules/Comment/types";
+import { T_CommmentSectionHook } from "@/components/Modules/Comment/types";
 import { paginateComments } from "@/utils/backend/comment";
 import { Comment } from "@/components/Modules/Comment/Comment";
 import { Some } from "@/utils/types";
-import { useCommentSection } from "@/hooks/commentSectionHook";
+import { useCommentSection } from "@/hooks/commentSection/commentSectionHook";
 import { E_CommentSectionActions } from "@/hooks/types";
 
 export const VideoContext = createContext<Some<T_VideoTab>>(null);
@@ -28,10 +28,10 @@ export default function VideoTabComments({ video } : { video: T_VideoTab }) {
             />
             <section className="width-100">
                 <h2 className="margin-block-end-2">
-                    <span>{state.comments.length}</span> 
+                    <span>{state.comments.length + state.totalReplyCount}</span> 
                     &nbsp;
                     <span>
-                        {state.comments.length === 1 ? 'comment' : 'comments'}
+                        {(state.comments.length + state.totalReplyCount) === 1 ? 'comment' : 'comments'}
                     </span>
                 </h2>
                 <Flex 
@@ -42,7 +42,12 @@ export default function VideoTabComments({ video } : { video: T_VideoTab }) {
                             <VideoContext.Provider value={video}>
                                 { 
                                     state.comments.map(comment => 
-                                        <Comment key={comment.id} props={comment} />) 
+                                        <Comment 
+                                            key={comment.id} 
+                                            props={comment} 
+                                            video={video}
+                                        />
+                                    ) 
                                 }
                             </VideoContext.Provider>
                         </CommentSectionContext.Provider>

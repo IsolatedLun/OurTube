@@ -25,13 +25,35 @@ export function paginateReplies(comment: T_Comment): T_FetchFn {
     )
 }
 
-export function createComment(data: T_CreateCommentData) {
-    return pb.collection<T_Comment>('comments').create(data, { expand: 'channel' });
+export async function createComment(video: T_VideoTab, data: T_CreateCommentData) {
+    const res = await pb.collection<T_Comment>('comments').create(data, { expand: 'channel' });
+    await pb.collection<T_VideoTab>('videos')
+        .update(video.id, { comment_count: video.comment_count + 1 });
+
+    return res;
 }
 
-export async function createReply(data: T_CreateCommentData) {
+export async function createReply(comment: T_Comment, data: T_CreateCommentData) {
     const result = await pb.collection<T_CommentReply>('replies')
         .create(data, { expand: 'channel' });
+    await pb.collection<T_Comment>('comments')
+        .update(comment.id, { reply_count: comment.reply_count + 1 })
+        
+    return result;
+}
+
+export async function deleteComment(video: T_VideoTab, comment: T_Comment) {
+    const res = await pb.collection<T_Comment>('comments').delete(comment.id);
+    await pb.collection<T_VideoTab>('videos')
+        .update(video.id, { comment_count: video.comment_count - 1 });
+
+    return res;
+}
+
+export async function deleteReply(comment: T_Comment, reply: T_CommentReply) {
+    const result = await pb.collection<T_CommentReply>('replies').delete(reply.id);
+    await pb.collection<T_Comment>('comments')
+        .update(comment.id, { reply_count: comment.reply_count - 1 })
         
     return result;
 }

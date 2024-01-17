@@ -24,7 +24,7 @@ export function AddReply(
             parent: parentComment.id
         };
 
-        const newReply = await createReply(data);
+        const newReply = await createReply(parentComment, data);
         setText('');
         onNewReply(newReply);
     }

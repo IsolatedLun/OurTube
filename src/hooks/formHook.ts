@@ -9,7 +9,6 @@ export function useFormHook(form: Record<string, any>): [T_FormHookUpdateFn, boo
     useEffect(() => {
         setInputs(Object.fromEntries(Object.keys(form).map(key => [key, false])));
     }, []);
-    console.log(inputs)
 
     const updateInput = (e: HTMLInputElement, setter: Dispatch<SetStateAction<any>>) => {
         setter((prev: Record<any, any>) => {
