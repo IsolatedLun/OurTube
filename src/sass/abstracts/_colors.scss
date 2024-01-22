@@ -11,13 +11,17 @@ $colors-dark: (
 	misc: (
 		text-muted: hsl(0, 0%, 51%),
 		text-dark: hsl(0, 0%, 12%),
+
 		text-error: hsl(0, 60%, 62%),
 		youtube-red: hsl(0, 60%, 51%),
-		skeleton: hsl(0, 0%, 20%),
 
+		skeleton: hsl(0, 0%, 20%),
 		page-background: hsl(0, 0%, 8%),
+
 		error: hsl(0 59% 59%),
-		error-transparent-5: hsl(0 59% 59% / 0.05)
+		error-transparent-5: hsl(0 59% 59% / 0.05),
+
+		modal-shadow: hsl(0 0% 0% / 0.36)
 	),
 	card: (
 		400: hsl(0, 0%, 12%),

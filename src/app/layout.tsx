@@ -5,6 +5,7 @@ import { getServerSession } from 'next-auth';
 import SessionProvider from '../components/SessionProvider';
 import Navbar from '@/components/Layout/Navbar/Navbar';
 import { css } from '@/utils/css/css';
+import { Auth } from '@/components/Auth';
 
 
 export const metadata: Metadata = {
@@ -28,10 +29,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       </head>
       <body>
         <SessionProvider session={session}>
-          <Navbar />
-          <main className={css("container", "").class} data-type="full">
-              {children}
-          </main>
+          <Auth>
+            <Navbar />
+            <main className={css("container", "").class} data-type="full">
+                {children}
+            </main>
+          </Auth>
         </SessionProvider>
       </body>
     </html>

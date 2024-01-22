@@ -1,14 +1,17 @@
 import { T_SignUpForm } from "@/app/auth/types";
+import { AuthContext } from "@/components/Auth";
 import Button from "@/components/Interactibles/Button/Button";
 import TextInput from "@/components/Interactibles/Inputs/TextInput";
 import Flex from "@/components/Modules/Flex/Flex";
 import { useFormHook } from "@/hooks/formHook";
-import { pb } from "@/utils/backend";
 import { css } from "@/utils/css/css";
 import { emailValidators, passwordValidators, usernameValidators } from "@/utils/input/defaults";
-import { FormEvent, useState } from "react";
+import { useRouter } from "next/navigation";
+import { FormEvent, useContext, useState } from "react";
 
 export default function SignUpForm() {
+    const router = useRouter()
+    const { signUp } = useContext(AuthContext);
     const [form, setForm] = useState<T_SignUpForm>({
         username: '',
         password: '',
@@ -20,7 +23,7 @@ export default function SignUpForm() {
     async function handleSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
 
-        pb.collection('users').create({ ...form, passwordConfirm: form.password });
+        signUp({ ...form, passwordConfirm: form.password });
     }
 
     return (
@@ -30,6 +33,7 @@ export default function SignUpForm() {
                     name: 'email',
                     label: 'Email Address',
                     placeholder: 'Enter Email Address',
+                    value: form.email,
                     inputType: 'text',
                     validators: emailValidators,
                     onInput: (e) => inputSetter(e, setForm)
@@ -38,6 +42,7 @@ export default function SignUpForm() {
                     name: 'username',
                     label: 'Username',
                     placeholder: 'Enter Username',
+                    value: form.username,
                     inputType: 'text',
                     validators: usernameValidators,
                     onInput: (e) => inputSetter(e, setForm)
@@ -46,6 +51,7 @@ export default function SignUpForm() {
                     name: 'password',
                     label: 'Password',
                     placeholder: 'Enter Password',
+                    value: form.password,
                     inputType: 'password',
                     validators: passwordValidators,
                     onInput: (e) => inputSetter(e, setForm)

@@ -1,0 +1,17 @@
+@use '../abstracts/' as *;
+
+dialog.modal {
+    @include transformCenter();
+
+    width: $modal-width;
+    height: $modal-height;
+    border: none;
+    outline: none;
+
+    border-radius: $card-border-radius;
+
+    &::backdrop {
+        background-color: $modal-backdrop;
+        backdrop-filter: $modal-backdrop-filter;
+    }
+}

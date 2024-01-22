@@ -33,6 +33,8 @@
         border-radius: $video-player-border-radius;
         background-color: $video-player-background;
 
+        border: $video-player-ratio-bar-border;
+
         &::after {
             @include pseudoElement();
 

@@ -3,10 +3,12 @@ import Flex from "@/components/Modules/Flex/Flex";
 import { css } from "@/utils/css/css";
 import urls from './urls.json';
 import { ICON_SIGN_OUT } from "@/icons";
-import { signOut, useSession } from "next-auth/react";
+import { useContext } from "react";
+import { AuthContext } from "@/components/Auth";
+import { pb } from "@/utils/backend";
 
 export default function HomeAside() {
-    const { data:session } = useSession();
+    const { record, logout } = useContext(AuthContext);
 
     return(
         <Flex tag="aside" props={{ column: true, align: 'start', gap: 3 }}>
@@ -30,12 +32,12 @@ export default function HomeAside() {
                         }
 
                         {
-                            (i === urls.length - 1 && session !== null)
+                            (i === urls.length - 1 && record)
                             ? (
                                 <Button button={{ 
                                     variant: 'error',
                                     cls: css(null, "fs-350 width-100"),
-                                    onClick: () => signOut()
+                                    onClick: logout
                                 }}>
                                     <Flex props={{ align: 'center', gap: 2 }}>
                                         <div className="icon">{ICON_SIGN_OUT}</div>

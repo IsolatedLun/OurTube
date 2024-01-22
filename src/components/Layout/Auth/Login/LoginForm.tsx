@@ -1,14 +1,15 @@
 import { T_LoginForm } from "@/app/auth/types";
+import { AuthContext } from "@/components/Auth";
 import Button from "@/components/Interactibles/Button/Button";
 import TextInput from "@/components/Interactibles/Inputs/TextInput";
 import Flex from "@/components/Modules/Flex/Flex";
 import { useFormHook } from "@/hooks/formHook";
-import { pb } from "@/utils/backend";
 import { css } from "@/utils/css/css";
 import { emailValidators, passwordValidators } from "@/utils/input/defaults";
-import { FormEvent, useState } from "react";
+import { FormEvent, useContext, useState } from "react";
 
 export default function LoginForm() {
+    const { login } = useContext(AuthContext);
     const [form, setForm] = useState<T_LoginForm>({
         email: '',
         password: '',
@@ -18,8 +19,7 @@ export default function LoginForm() {
     async function handleSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
 
-        await pb.collection('users').authWithPassword(form.email, form.password);
-        await pb.collection('users').authRefresh();
+        login(form);
     }
 
     return (
@@ -30,6 +30,7 @@ export default function LoginForm() {
                     label: 'Email Address',
                     placeholder: 'Enter Email Address',
                     inputType: 'text',
+                    value: form.email, 
                     validators: emailValidators,
                     onInput: (e) => inputSetter(e, setForm)
                 }} />
@@ -39,6 +40,7 @@ export default function LoginForm() {
                     label: 'Password',
                     placeholder: 'Enter Password',
                     inputType: 'password',
+                    value: form.password,
                     validators: passwordValidators,
                     onInput: (e) => inputSetter(e, setForm)
                 }} />

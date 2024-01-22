@@ -24,6 +24,8 @@ $clr-skeleton: hsl(0 0% 20%);
 $clr-card-400: map-get(map-get($active-theme, 'card'), 400);
 $clr-card-500: map-get(map-get($active-theme, 'card'), 500);
 
+$clr-modal-shadow: map-get(map-get($active-theme, 'misc'), 'modal-shadow');
+
 // Global
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@200;300;400;500;600&display=swap');
 
@@ -141,4 +143,11 @@ $video-player-background: $clr-primary-transparent-10;
 $video-player-foreground: $clr-primary-400;
 $video-player-ratio-bar-width: 144px;
 $video-player-ratio-bar-height: 7px;
+$video-player-ratio-bar-border: 1px solid $video-player-background;
 $video-player-border-radius: $border-radius-bevelled;
+
+// Modal
+$modal-width: 50vw;
+$modal-height: 50vh;
+$modal-backdrop: $clr-modal-shadow;
+$modal-backdrop-filter: blur(2px);

@@ -10,7 +10,7 @@ import { paginateComments } from "@/utils/backend/comment";
 import { Comment } from "@/components/Modules/Comment/Comment";
 import { Some } from "@/utils/types";
 import { useCommentSection } from "@/hooks/commentSection/commentSectionHook";
-import { E_CommentSectionActions } from "@/hooks/types";
+import { E_CommentSectionActions } from "@/hooks/commentSection/types";
 
 export const VideoContext = createContext<Some<T_VideoTab>>(null);
 export const CommentSectionContext = createContext<Some<T_CommmentSectionHook>>(null);
